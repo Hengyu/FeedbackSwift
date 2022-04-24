@@ -1,0 +1,61 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ehab Abdou on 2016/05/10.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "سؤال";
+
+"Request" = "طلب";
+
+"Bug Report" = "الإبلاغ عن خطأ";
+
+"Other" = "آخر";
+
+"feedback.Device" = "الجهاز";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "الاسم";
+
+"feedback.Version" = "الإصدار";
+
+"feedback.Build" = "البنية";
+
+"feedback.DeviceInfo" = "معلومات الجهاز";
+
+"feedback.AppInfo" = "معلومات التطبيق";
+
+"feedback.Feedback" = "رأيك";
+
+"feedback.Topic" = "الموضوع";
+
+"feedback.Topics" = "المواضيع";
+
+"feedback.Error" = "خطأ";
+
+"feedback.Mail" = "إرسال";
+
+"feedback.MailConfigurationErrorMessage" ="لم يكن لديك حساب بريد إلكتروني صالح";
+
+"feedback.Dismiss" ="صرف";
+
+"feedback.AdditionalInfo"="معلومات إضافية";
+
+"feedback.AttachImageOrVideo" ="اختر مرفق رأيك (صورة)";
+
+"feedback.Cancel" ="إلغاء";
+
+"feedback.Camera" ="كاميرا";
+
+"feedback.PhotoLibrary" ="اختر من الألبوم";
+
+"feedback.UserDetail"="معلومات المستخدم";
+
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "أدخل النص هنا";

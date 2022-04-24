@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "Question";
+
+"Request" = "Requête";
+
+"Bug Report" = "Rapport de bug";
+
+"Other" = "Autre";
+
+"feedback.Device" = "Appareil";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Nom";
+
+"feedback.Version" = "Version";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "Informations sur l'appareil";
+
+"feedback.AppInfo" = "Informations sur l'application";
+
+"feedback.Feedback" = "Support";
+
+"feedback.Topic" = "Sujet";
+
+"feedback.Topics" = "Sujets";
+
+"feedback.Error" = "Error";
+
+"feedback.Mail" = "Mail";
+
+"feedback.MailConfigurationErrorMessage" = "Vous n'avez pas configuré de compte mail";
+
+"feedback.Dismiss" = "Fermer";
+
+"feedback.AdditionalInfo" = "Informations complémentaires";
+
+"feedback.AttachImageOrVideo" = "Sélectionner une pièce-jointe (image)";
+
+"feedback.Cancel" = "Annuler";
+
+"feedback.Camera" = "Appareil photo";
+
+"feedback.PhotoLibrary" = "Sélectionner depuis l'album";
+"feedback.UserDetail" = "User Detail";
+"feedback.Delete" = "Delete";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "Entrez le texte ici...";

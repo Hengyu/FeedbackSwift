@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "質問";
+
+"Request" = "リクエスト";
+
+"Bug Report" = "バグレポート";
+
+"Other" = "その他";
+
+"feedback.Device" = "デバイス";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "アプリ名";
+
+"feedback.Version" = "バージョン";
+
+"feedback.Build" = "ビルド";
+
+"feedback.DeviceInfo" = "デバイス情報";
+
+"feedback.AppInfo" = "アプリ情報";
+
+"feedback.Feedback" = "フィードバック";
+
+"feedback.Topic" = "トピック";
+
+"feedback.Topics" = "トピック";
+
+"feedback.Error" = "エラー";
+
+"feedback.Mail" = "メール";
+
+"feedback.MailConfigurationErrorMessage" ="有効な電子メールアカウントを持っていません";
+
+"feedback.Dismiss" ="閉じる";
+
+"feedback.AdditionalInfo"="追加情報";
+
+"feedback.AttachImageOrVideo" ="フィードバック添付画像を選択";
+
+"feedback.Cancel" ="キャンセル";
+
+"feedback.Camera" ="カメラ";
+
+"feedback.PhotoLibrary" ="アルバムから選択";
+"feedback.UserDetail" = "ユーザ情報";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "削除";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "ここにテキストを入力してください...";

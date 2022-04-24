@@ -1,0 +1,62 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+// Edited by Gürhan Yerlikaya (gurhanyerlikaya@gmail.com)
+
+"Question" = "Soru";
+
+"Request" = "İstek";
+
+"Bug Report" = "Hata bildirimi";
+
+"Other" = "Diğer";
+
+"feedback.Device" = "Cihaz";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "İsim";
+
+"feedback.Version" = "Sürüm";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "Cihaz Bilgisi";
+
+"feedback.AppInfo" = "Uygulama bilgisi";
+
+"feedback.Feedback" = "Geri Bildirim";
+
+"feedback.Topic" = "Konu";
+
+"feedback.Topics" = "Konular";
+
+"feedback.Error" = "Hata";
+
+"feedback.Mail" = "Gönder";
+
+"feedback.MailConfigurationErrorMessage" ="Cihazda tanımlı e-posta bulunamadı.";
+
+"feedback.Dismiss" ="Son ver";
+
+"feedback.AdditionalInfo"="Ek bilgi";
+
+"feedback.AttachImageOrVideo" ="Detay";
+
+"feedback.Cancel" ="İptal";
+
+"feedback.Camera" ="Kamera";
+
+"feedback.PhotoLibrary" ="Cihaz’dan ekle";
+
+"feedback.UserDetail"="Kullanıcı detayı";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "Yazıyı buraya girin...";

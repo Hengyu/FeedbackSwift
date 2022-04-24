@@ -1,0 +1,62 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+// Edited by Dennis Kutlubaev (alwawee@gmail.com)
+
+"Question" = "Вопрос";
+
+"Request" = "Предложение";
+
+"Bug Report" = "Уведомление об ошибке";
+
+"Other" = "Другое";
+
+"feedback.Device" = "Устройство";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Название";
+
+"feedback.Version" = "Версия";
+
+"feedback.Build" = "Сборка";
+
+"feedback.DeviceInfo" = "Информация об устройстве";
+
+"feedback.AppInfo" = "Информация о приложении";
+
+"feedback.Feedback" = "Обратная связь";
+
+"feedback.Topic" = "Тема";
+
+"feedback.Topics" = "Темы";
+
+"feedback.Error" = "Ошибка";
+
+"feedback.Mail" = "Отправить";
+
+"feedback.MailConfigurationErrorMessage" ="Отсутствует учётная запись электронной почты.";
+
+"feedback.Dismiss" ="Dismiss";
+
+"feedback.AdditionalInfo"="Дополнительная информация";
+
+"feedback.AttachImageOrVideo" ="Прикрепить";
+
+"feedback.Cancel" ="Отмена";
+
+"feedback.Camera" ="Камера";
+
+"feedback.PhotoLibrary" ="Фотоальбом";
+
+"feedback.UserDetail"="Информация о пользователе";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "Введите текст...";

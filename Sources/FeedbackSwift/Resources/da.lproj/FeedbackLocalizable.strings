@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "Spørgsmål";
+
+"Request" = "Forespørgsel";
+
+"Bug Report" = "Fejlmelding";
+
+"Other" = "Andet";
+
+"feedback.Device" = "Enhed";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Navn";
+
+"feedback.Version" = "Version";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "Information om enheden";
+
+"feedback.AppInfo" = "Information om appen";
+
+"feedback.Feedback" = "Feedback";
+
+"feedback.Topic" = "Emne";
+
+"feedback.Topics" = "Emner";
+
+"feedback.Error" = "Fejl";
+
+"feedback.Mail" = "Send";
+
+"feedback.MailConfigurationErrorMessage" ="Du har ikke en gyldig email konto";
+
+"feedback.Dismiss" ="Annuller";
+
+"feedback.AdditionalInfo"="Yderligere information";
+
+"feedback.AttachImageOrVideo" ="Vælg et billede";
+
+"feedback.Cancel" ="Annuller";
+
+"feedback.Camera" ="Kamera";
+
+"feedback.PhotoLibrary" ="Vælg fra album";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "Indtast tekst her ...";

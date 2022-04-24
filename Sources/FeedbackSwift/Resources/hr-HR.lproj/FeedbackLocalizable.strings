@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "Pitanje";
+
+"Request" = "Zahtjev";
+
+"Bug Report" = "Greška";
+
+"Other" = "Drugo";
+
+"feedback.Device" = "Uređaj";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Ime";
+
+"feedback.Version" = "Verzija";
+
+"feedback.Build" = "Podverzija";
+
+"feedback.DeviceInfo" = "Informacije o uređaju";
+
+"feedback.AppInfo" = "Informacije o aplikaciji";
+
+"feedback.Feedback" = "Povratna informacija";
+
+"feedback.Topic" = "Tema";
+
+"feedback.Topics" = "Teme";
+
+"feedback.Error" = "Greška";
+
+"feedback.Mail" = "E-mail";
+
+"feedback.MailConfigurationErrorMessage" ="Nemate podešen e-mail račun";
+
+"feedback.Dismiss" ="Zatvori";
+
+"feedback.AdditionalInfo"="Dodatne informacije";
+
+"feedback.AttachImageOrVideo" ="Izaberite prilog (sliku)";
+
+"feedback.Cancel" ="Otkaži";
+
+"feedback.Camera" ="Kamera";
+
+"feedback.PhotoLibrary" ="Izaberite iz albuma";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "Ovdje unesite tekst ...";

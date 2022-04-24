@@ -1,0 +1,61 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "問題";
+
+"Request" = "需求";
+
+"Bug Report" = "程式錯誤回報";
+
+"Other" = "其他";
+
+"feedback.Device" = "設備";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "名字";
+
+"feedback.Version" = "版本";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "設備資訊";
+
+"feedback.AppInfo" = "軟體資訊";
+
+"feedback.Feedback" = "反饋";
+
+"feedback.Topic" = "主題";
+
+"feedback.Topics" = "主題";
+
+"feedback.Error" = "錯誤";
+
+"feedback.Mail" = "郵件";
+
+"feedback.MailConfigurationErrorMessage" ="您沒有一個有效的郵件賬戶";
+
+"feedback.Dismiss" ="Dismiss";
+
+"feedback.AdditionalInfo"="附加信息";
+
+"feedback.AttachImageOrVideo" ="選擇反饋附件（圖片）";
+
+"feedback.Cancel" ="取消";
+
+"feedback.Camera" ="拍照";
+
+"feedback.Ok" = "好的";
+
+"feedback.PhotoLibrary" ="從相冊中選取";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "在此輸入文字...";

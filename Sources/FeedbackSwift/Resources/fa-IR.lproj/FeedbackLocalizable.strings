@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "سوال";
+
+"Request" = "درخواست";
+
+"Bug Report" = "گزارش مشکل";
+
+"Other" = "دیگر";
+
+"feedback.Device" = "دستگاه";
+
+"feedback.iOS" = "آی‌او‌اس";
+
+"feedback.Name" = "نام";
+
+"feedback.Version" = "نسخه";
+
+"feedback.Build" = "ساخت";
+
+"feedback.DeviceInfo" = "اطلاعات دستگاه";
+
+"feedback.AppInfo" = "اطلاعات برنامه";
+
+"feedback.Feedback" = "نظر";
+
+"feedback.Topic" = "موضوع";
+
+"feedback.Topics" = "موضوع‌ها";
+
+"feedback.Error" = "خطا";
+
+"feedback.Mail" = "ارسال پیام";
+
+"feedback.MailConfigurationErrorMessage" ="شما ایمیل دستگاه خود را تنظیم نکرده‌اید";
+
+"feedback.Dismiss" ="بستن";
+
+"feedback.AdditionalInfo"="اطلاعات اضافه";
+
+"feedback.AttachImageOrVideo" ="پیوست خود را انتخاب کنید (تصویر)";
+
+"feedback.Cancel" ="لغو";
+
+"feedback.Camera" ="دوربین";
+
+"feedback.PhotoLibrary" ="از آلبوم خود انتخاب کنید";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "متن را اینجا وارد کنید";

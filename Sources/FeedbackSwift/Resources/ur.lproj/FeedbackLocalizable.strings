@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "سوال";
+
+"Request" = "درخواست";
+
+"Bug Report" = "بَگ رپورٹ";
+
+"Other" = "دیگر";
+
+"feedback.Device" = "آلہ";
+
+"feedback.iOS" = "آئی او ایس";
+
+"feedback.Name" = "نام";
+
+"feedback.Version" = "ورژن";
+
+"feedback.Build" = "ساخت";
+
+"feedback.DeviceInfo" = "معلوماتِ آلہ";
+
+"feedback.AppInfo" = "معلوماتِ اطلاق";
+
+"feedback.Feedback" = "رائے";
+
+"feedback.Topic" = "موضوع";
+
+"feedback.Topics" = "موضوعات";
+
+"feedback.Error" = "غلطی";
+
+"feedback.Mail" = "میل";
+
+"feedback.MailConfigurationErrorMessage" ="آپ کے پاس جائز ای میل کھاتہ نہیں ہے";
+
+"feedback.Dismiss" ="منسوخ";
+
+"feedback.AdditionalInfo"="اضافی معلومات";
+
+"feedback.AttachImageOrVideo" ="رائے کا منسلکہ(تصویر) منتخب کیجیے";
+
+"feedback.Cancel" ="منسوخ";
+
+"feedback.Camera" ="کیمرہ";
+
+"feedback.PhotoLibrary" ="البم سے منتخب کیجیے";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "یہاں متن درج کریں";

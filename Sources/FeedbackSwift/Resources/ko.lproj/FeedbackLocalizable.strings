@@ -1,0 +1,59 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "질문";
+
+"Request" = "요청";
+
+"Bug Report" = "버그 리포트";
+
+"Other" = "기타";
+
+"feedback.Device" = "디바이스";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "이름";
+
+"feedback.Version" = "버젼";
+
+"feedback.Build" = "빌드";
+
+"feedback.DeviceInfo" = "디바이스 정보";
+
+"feedback.AppInfo" = "앱 정보";
+
+"feedback.Feedback" = "피드백";
+
+"feedback.Topic" = "주제";
+
+"feedback.Topics" = "주제들";
+
+"feedback.Error" = "오류";
+
+"feedback.Mail" = "메일";
+
+"feedback.MailConfigurationErrorMessage" ="정상적인 이메일 계정을 갖고 있지 않습니다";
+
+"feedback.Dismiss" ="닫기";
+
+"feedback.AdditionalInfo"="추가 정보";
+
+"feedback.AttachImageOrVideo" ="같이 전달할 첨부사진 고르기";
+
+"feedback.Cancel" ="취소";
+
+"feedback.Camera" ="카메라에서 선택";
+
+"feedback.PhotoLibrary" ="앨범에서 선택";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "여기에 텍스트를 입력하세요 ...";

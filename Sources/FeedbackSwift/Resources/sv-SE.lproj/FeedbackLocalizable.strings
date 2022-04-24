@@ -1,0 +1,61 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "Förfrågan";
+
+"Request" = "Förslag";
+
+"Bug Report" = "Bugg";
+
+"Other" = "Annan";
+
+"feedback.Device" = "Enhet";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Namn";
+
+"feedback.Version" = "Version";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "Enhetsinformation ";
+
+"feedback.AppInfo" = "App Info";
+
+"feedback.Feedback" = "Feedback";
+
+"feedback.Topic" = "Ämne";
+
+"feedback.Topics" = "Ämnen";
+
+"feedback.Error" = "Felmeddelande";
+
+"feedback.Mail" = "Skicka";
+
+"feedback.MailConfigurationErrorMessage" ="Det går inte att verifiera ett giltligt epost-konto";
+
+"feedback.Dismiss" ="Avfärda";
+
+"feedback.AdditionalInfo"="Ytterligare information";
+
+"feedback.AttachImageOrVideo" ="Välj bifogad fil(bild) ";
+
+"feedback.Cancel" ="Ångra";
+
+"feedback.Camera" ="Kamera";
+
+"feedback.PhotoLibrary" ="Välj från album";
+
+"feedback.UserDetail"="Användardetaljer";
+
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "Ange text här ...";

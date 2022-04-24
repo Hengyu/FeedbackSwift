@@ -1,0 +1,61 @@
+/* Localizable.strings
+  CTFeedbackDemo
+
+  Created by Ryoichi Izumita on 2013/10/31.
+  Copyright (c) 2013 CAPH. All rights reserved. */
+
+"Question" = "问题";
+
+"Request" = "需求";
+
+"Bug Report" = "程序错误报告";
+
+"Other" = "其他";
+
+"feedback.Device" = "设备";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "名字";
+
+"feedback.Version" = "版本";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "设备信息";
+
+"feedback.AppInfo" = "应用信息";
+
+"feedback.Feedback" = "反馈";
+
+"feedback.Topic" = "主题";
+
+"feedback.Topics" = "主题";
+
+"feedback.Error" = "错误";
+
+"feedback.Mail" = "邮件";
+
+"feedback.MailConfigurationErrorMessage" ="您没有一个有效的邮件账户";
+
+"feedback.Dismiss" ="Dismiss";
+
+"feedback.AdditionalInfo"="附加信息";
+
+"feedback.AttachImageOrVideo" ="选择反馈附件（图片）";
+
+"feedback.Cancel" ="取消";
+
+"feedback.Camera" ="拍照";
+
+"feedback.Ok" = "好的";
+
+"feedback.PhotoLibrary" ="从相册中选取";
+"feedback.UserDetail" = "User Detail";
+"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+"feedback.UnknownError" = "Unknown Error";
+"feedback.Delete" = "Delete";
+"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
+"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+
+"feedback.BodyPlaceholder" = "在此输入文字...";

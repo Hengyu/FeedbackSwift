@@ -1,0 +1,60 @@
+/*
+  Localizable.strings
+  CTFeedbackSwiftLanguages
+
+  Created by Sebastian Szöcs on 9/28/21.
+  
+*/
+"Question" = "Otázka";
+
+"Request" = "Žádost";
+
+"Bug Report" = "Hlášení chyby";
+
+"Other" = "Jiný";
+
+"feedback.Device" = "Zařízení";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Aplikace";
+
+"feedback.Version" = "Verze";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "Informace o zařízení";
+
+"feedback.AppInfo" = "Informace o aplikaci";
+
+"feedback.Feedback" = "Zpětná vazba";
+
+"feedback.Topic" = "Téma";
+
+"feedback.Topics" = "Témata";
+
+"feedback.Error" = "Chyba";
+
+"feedback.Mail" = "Mail";
+
+"feedback.MailConfigurationErrorMessage" ="Nemáš platný e-mailový účet";
+
+"feedback.Dismiss" ="Zrušit";
+
+"feedback.AdditionalInfo"="Doplňující informace";
+
+"feedback.AttachImageOrVideo" ="Vyber přílohu pro zpětnou vazbu (obrázek)";
+
+"feedback.Cancel" ="Zrušit";
+
+"feedback.Camera" ="Kamera";
+
+"feedback.PhotoLibrary" ="Vybrat fotku z knihovny";
+"feedback.UserDetail" = "Detail uživatele";
+"feedback.FeedbackGenerationErrorMessage" = "Vyskytla se chyba při generování zpětné vazby";
+"feedback.UnknownError" = "Neznámá chyba";
+"feedback.Delete" = "Vymazat";
+"feedback.requiredCameraAccess" = "Aplikace vyžaduje přístup k fotoaparátu";
+"feedback.requiredLibraryAccess" = "Aplikace vyžaduje přístup ke knihovne fotek pro vybrání snímku obrazovky";
+
+"feedback.BodyPlaceholder" = "Sem zadej text...";

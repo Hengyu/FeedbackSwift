@@ -1,0 +1,60 @@
+/*
+  Localizable.strings
+  CTFeedbackSwiftLanguages
+
+  Created by Sebastian Szöcs on 9/28/21.
+  
+*/
+"Question" = "Otázka";
+
+"Request" = "Požiadavka";
+
+"Bug Report" = "Hlásenie chyby";
+
+"Other" = "Ostatné";
+
+"feedback.Device" = "Zariadenie";
+
+"feedback.iOS" = "iOS";
+
+"feedback.Name" = "Apka";
+
+"feedback.Version" = "Verzia";
+
+"feedback.Build" = "Build";
+
+"feedback.DeviceInfo" = "Informácie o zariadení";
+
+"feedback.AppInfo" = "Informácie o apke";
+
+"feedback.Feedback" = "Spätná väzba";
+
+"feedback.Topic" = "Téma";
+
+"feedback.Topics" = "Témy";
+
+"feedback.Error" = "Chyba";
+
+"feedback.Mail" = "Mail";
+
+"feedback.MailConfigurationErrorMessage" ="Nemáš platné e-mailové konto";
+
+"feedback.Dismiss" ="Zrušiť";
+
+"feedback.AdditionalInfo"="Dodatočné informácie";
+
+"feedback.AttachImageOrVideo" ="Vyber prílohu pre spätnú väzbu (obrázok)";
+
+"feedback.Cancel" ="Zrušiť";
+
+"feedback.Camera" ="Kamera";
+
+"feedback.PhotoLibrary" ="Vybrať z albumu";
+"feedback.UserDetail" = "Detail užívateľa";
+"feedback.FeedbackGenerationErrorMessage" = "Vyskytla sa chyba pri generovaní spätnej väzby";
+"feedback.UnknownError" = "Neznáma chyba";
+"feedback.Delete" = "Vymazať";
+"feedback.requiredCameraAccess" = "Apka vyžaduje prístup ku kamere pre pridanie obrázku";
+"feedback.requiredLibraryAccess" = "Apka vyžaduje prístup ku knižnici fotiek pre vybranie snímku obrazovky";
+
+"feedback.BodyPlaceholder" = "Sem zadaj text...";
