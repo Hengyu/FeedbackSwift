@@ -109,13 +109,13 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
                     })
         }
 
-        if let delete = deleteAction {
+        if let deleteAction {
             alertController.addAction(
                 UIAlertAction(
                     title: localized("feedback.Delete"),
                     style: .destructive
                 ) { _ in
-                    delete()
+                    deleteAction()
                 }
             )
         }

@@ -7,8 +7,8 @@ import Foundation
 
 struct AppNameItem: FeedbackItemProtocol {
     var name: String {
-        if let result = _name {
-            return result
+        if let _name {
+            return _name
         }
         if let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
             return displayName

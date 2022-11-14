@@ -199,7 +199,7 @@ extension FeedbackViewController: AttachmentCellEventProtocol {
 
 extension FeedbackViewController {
     private func configureLeftBarButtonItem() {
-        if let navigationController = navigationController {
+        if let navigationController {
             if navigationController.viewControllers[0] === self {
                 navigationItem.leftBarButtonItem = UIBarButtonItem(
                     barButtonSystemItem: .cancel,
@@ -225,7 +225,7 @@ extension FeedbackViewController {
 
     @objc
     func cancelButtonTapped(_ sender: Any) {
-        if let navigationController = navigationController {
+        if let navigationController {
             if navigationController.viewControllers.first === self {
                 wireframe.dismiss(completion: .none)
             } else {

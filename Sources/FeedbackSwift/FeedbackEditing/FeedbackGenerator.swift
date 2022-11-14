@@ -85,7 +85,7 @@ struct FeedbackGenerator {
             appVersion,
             appBuild
         )
-        if let additional = additionalDiagnosticContent { content.append(additional) }
+        if let additionalDiagnosticContent { content.append(additionalDiagnosticContent) }
         return content
     }
 
@@ -108,7 +108,7 @@ struct FeedbackGenerator {
             appVersion,
             appBuild
         )
-        if let additional = additionalDiagnosticContent { content.append(additional) }
+        if let additionalDiagnosticContent { content.append(additionalDiagnosticContent) }
         return content
     }
 

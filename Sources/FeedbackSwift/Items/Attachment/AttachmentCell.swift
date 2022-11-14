@@ -76,7 +76,7 @@ class AttachmentCell: UITableViewCell {
 
 extension AttachmentCell {
     @objc func imageViewTapped(_ gestureRecognizer: UITapGestureRecognizer) {
-        guard let item = item, item.image != nil else { return }
+        guard let item, item.image != nil else { return }
         eventHandler.showImage(of: item)
     }
 }

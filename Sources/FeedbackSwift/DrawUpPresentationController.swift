@@ -21,7 +21,7 @@ class DrawUpPresentationController: UIPresentationController {
     }
 
     override func presentationTransitionWillBegin() {
-        guard let containerView = self.containerView else { return }
+        guard let containerView else { return }
         overlayView = createOverlayView(withFrame: containerView.bounds)
         containerView.insertSubview(overlayView!, at: 0)
         presentedViewController.transitionCoordinator?.animate { [unowned self] _ in

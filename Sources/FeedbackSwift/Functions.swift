@@ -59,6 +59,6 @@ func getMediaFromURL(_ url: URL) -> Media? {
 }
 
 func push<Item>(_ item: Item?) -> (((Item) -> Void) -> Void)? {
-    guard let item = item else { return nil }
+    guard let item else { return nil }
     return { closure in closure(item) }
 }
