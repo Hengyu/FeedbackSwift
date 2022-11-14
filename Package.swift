@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "FeedbackSwift",
     defaultLocalization: "en",
-    platforms: [.iOS(.v10), .macCatalyst(.v14)],
+    platforms: [.iOS(.v11), .macCatalyst(.v14)],
     products: [
         .library(name: "FeedbackSwift", targets: ["FeedbackSwift"])
     ],
