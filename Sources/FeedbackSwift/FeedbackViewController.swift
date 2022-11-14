@@ -170,7 +170,11 @@ extension FeedbackViewController {
 
 extension FeedbackViewController: FeedbackEditingEventProtocol {
     public func updated(at indexPath: IndexPath) {
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        if #available(iOS 15.0, macCatalyst 15.0, *) {
+            tableView.reconfigureRows(at: [indexPath])
+        } else {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 
