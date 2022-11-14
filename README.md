@@ -1,6 +1,6 @@
 # FeedbackSwift
 
-FeedbackSwift is a framework to compose a feedback for iOS 10.0+ & macCatalyst 13.0+.
+FeedbackSwift is a framework to compose a feedback for iOS 11.0+ & macCatalyst 14.0+.
 
 ## Installation
 
