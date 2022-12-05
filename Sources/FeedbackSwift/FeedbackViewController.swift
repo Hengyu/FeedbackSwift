@@ -76,15 +76,6 @@ open class FeedbackViewController: UITableViewController {
 
         cellFactories.forEach(tableView.register(with:))
         updateDataSource(configuration: configuration)
-
-        title = localized("feedback.Feedback")
-        navigationItem
-            .rightBarButtonItem = UIBarButtonItem(
-                title: localized("feedback.Mail"),
-                style: .plain,
-                target: self,
-                action: #selector(mailButtonTapped(_:))
-            )
     }
 
     public override func viewWillAppear(_ animated: Bool) {
@@ -94,6 +85,7 @@ open class FeedbackViewController: UITableViewController {
         navigationController?.isNavigationBarHidden = false
 
         configureLeftBarButtonItem()
+        configureNavigationBar()
     }
 
     public override func viewWillDisappear(_ animated: Bool) {
@@ -202,6 +194,28 @@ extension FeedbackViewController: AttachmentCellEventProtocol {
 }
 
 extension FeedbackViewController {
+    private func configureNavigationBar() {
+        if parent == navigationController?.topViewController {
+            // the view is wrapped in the SwiftUI's container
+            // https://stackoverflow.com/a/59317657/4402255
+            parent?.title = localized("feedback.Feedback")
+            parent?.navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: localized("feedback.Mail"),
+                style: .plain,
+                target: self,
+                action: #selector(mailButtonTapped(_:))
+            )
+        } else {
+            title = localized("feedback.Feedback")
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                title: localized("feedback.Mail"),
+                style: .plain,
+                target: self,
+                action: #selector(mailButtonTapped(_:))
+            )
+        }
+    }
+
     private func configureLeftBarButtonItem() {
         if let navigationController {
             if navigationController.viewControllers[0] === self {
