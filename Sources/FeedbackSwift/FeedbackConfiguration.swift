@@ -14,6 +14,7 @@ public class FeedbackConfiguration {
     public var usesHTML: Bool
     public var dataSource: FeedbackItemsDataSource
 
+    /// - Note: `hidesAttachmentCell` only takes effect on macCatalyst 14.0+.
     public init(
         subject: String? = .none,
         additionalDiagnosticContent: String? = .none,
