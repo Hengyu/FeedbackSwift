@@ -6,10 +6,10 @@
 //  Copyright © 2017 CAPH TECH. All rights reserved.
 //
 
-import UIKit
 import Dispatch
 import MessageUI
 import Photos
+import UIKit
 
 open class FeedbackViewController: UITableViewController {
     public var mailComposeDelegate: MFMailComposeViewControllerDelegate?
@@ -30,7 +30,7 @@ open class FeedbackViewController: UITableViewController {
         AnyCellFactory(SystemVersionCell.self),
         AnyCellFactory(AppNameCell.self),
         AnyCellFactory(AppVersionCell.self),
-        AnyCellFactory(AppBuildCell.self)
+        AnyCellFactory(AppBuildCell.self),
     ]
 
     private lazy var feedbackEditingService: FeedbackEditingServiceProtocol = {

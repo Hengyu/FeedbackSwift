@@ -17,6 +17,6 @@ let package = Package(
                 .copy("Resources/PlatformNames.plist")
             ]
         ),
-        .testTarget(name: "FeedbackSwiftTests", dependencies: ["FeedbackSwift"])
+        .testTarget(name: "FeedbackSwiftTests", dependencies: ["FeedbackSwift"]),
     ]
 )

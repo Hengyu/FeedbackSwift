@@ -3,8 +3,8 @@
 // Copyright (c) 2017 CAPH TECH. All rights reserved.
 //
 
-import Foundation
 import Dispatch
+import Foundation
 
 var storedFeedbackBundle: Bundle?
 

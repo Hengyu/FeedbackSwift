@@ -6,25 +6,16 @@
 import Foundation
 
 struct AppNameItem: FeedbackItemProtocol {
-    var name: String {
-        if let _name {
-            return _name
-        }
-        if let displayName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String {
-            return displayName
-        }
-        if let bundleName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String {
-            return bundleName
-        }
-        return ""
-    }
-
-    private var _name: String?
-
     let isHidden: Bool
+    let name: String
 
     init(isHidden: Bool, name: String? = nil) {
         self.isHidden = isHidden
-        self._name = name
+        self.name = name ?? AppNameItem.defaultName ?? ""
+    }
+
+    private static var defaultName: String? {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ??
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
     }
 }

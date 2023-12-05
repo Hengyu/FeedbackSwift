@@ -11,7 +11,7 @@ public struct TopicItem: FeedbackItemProtocol {
             Topic.question,
             Topic.request,
             Topic.bugReport,
-            Topic.other
+            Topic.other,
         ]
     }
 

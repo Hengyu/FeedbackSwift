@@ -3,9 +3,9 @@
 // Copyright (c) 2017 CAPH TECH. All rights reserved.
 //
 
-import UIKit
-import MobileCoreServices
 import MessageUI
+import MobileCoreServices
+import UIKit
 import UniformTypeIdentifiers
 
 protocol FeedbackWireframeProtocol {
@@ -98,34 +98,28 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
         #if os(iOS)
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alertController.addAction(
-                UIAlertAction(
-                    title: localized("feedback.Camera"),
-                    style: .default) { _ in
-                        authorizeCamera { granted in
-                            if granted {
-                                self.showImagePicker(sourceType: .camera)
-                            } else {
-                                self.showCameraAuthorizingAlert()
-                            }
+                UIAlertAction(title: localized("feedback.Camera"), style: .default) { _ in
+                    authorizeCamera { granted in
+                        if granted {
+                            self.showImagePicker(sourceType: .camera)
+                        } else {
+                            self.showCameraAuthorizingAlert()
                         }
-                    })
+                    }
+                }
+            )
         }
         #endif
 
         if let deleteAction {
             alertController.addAction(
-                UIAlertAction(
-                    title: localized("feedback.Delete"),
-                    style: .destructive
-                ) { _ in
+                UIAlertAction(title: localized("feedback.Delete"), style: .destructive) { _ in
                     deleteAction()
                 }
             )
         }
 
-        alertController.addAction(
-            UIAlertAction(title: localized("feedback.Cancel"), style: .cancel)
-        )
+        alertController.addAction(UIAlertAction(title: localized("feedback.Cancel"), style: .cancel))
 
         alertController.popoverPresentationController?.sourceView = viewController?.view
         alertController.popoverPresentationController?.sourceRect = cellRect

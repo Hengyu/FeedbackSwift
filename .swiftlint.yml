@@ -1,0 +1,7 @@
+trailing_comma:
+    mandatory_comma: true
+
+opt_in_rules:
+  - fallthrough
+  - implicit_return
+  - sorted_imports

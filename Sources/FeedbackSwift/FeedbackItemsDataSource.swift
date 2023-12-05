@@ -9,7 +9,7 @@ public class FeedbackItemsDataSource {
     var sections: [FeedbackItemsSection] = []
 
     var numberOfSections: Int {
-        return filteredSections.count
+        filteredSections.count
     }
 
     public init(
@@ -46,7 +46,7 @@ public class FeedbackItemsDataSource {
                 items: [
                     AppNameItem(isHidden: hidesAppInfoSection, name: appName),
                         AppVersionItem(isHidden: hidesAppInfoSection),
-                        AppBuildItem(isHidden: hidesAppInfoSection)
+                        AppBuildItem(isHidden: hidesAppInfoSection),
                 ]
             )
         )
@@ -59,13 +59,13 @@ public class FeedbackItemsDataSource {
 
 extension FeedbackItemsDataSource {
     private var filteredSections: [FeedbackItemsSection] {
-        return sections.filter { section in
+        sections.filter { section in
             section.items.filter { !$0.isHidden }.isEmpty == false
         }
     }
 
     private subscript(indexPath: IndexPath) -> FeedbackItemProtocol {
-        get { return filteredSections[indexPath.section][indexPath.item] }
+        get { filteredSections[indexPath.section][indexPath.item] }
         set { filteredSections[indexPath.section][indexPath.item] = newValue }
     }
 
@@ -106,13 +106,13 @@ class FeedbackItemsSection {
 }
 
 extension FeedbackItemsSection: Collection {
-    var startIndex: Int { return items.startIndex }
-    var endIndex: Int { return items.endIndex }
+    var startIndex: Int { items.startIndex }
+    var endIndex: Int { items.endIndex }
 
     subscript(position: Int) -> FeedbackItemProtocol {
-        get { return items[position] }
+        get { items[position] }
         set { items[position] = newValue }
     }
 
-    func index(after index: Int) -> Int { return items.index(after: index) }
+    func index(after index: Int) -> Int { items.index(after: index) }
 }

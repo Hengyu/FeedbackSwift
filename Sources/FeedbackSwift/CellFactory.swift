@@ -21,9 +21,9 @@ protocol CellFactoryProtocol {
 }
 
 extension CellFactoryProtocol {
-    static var reuseIdentifier: String { return String(describing: self) }
+    static var reuseIdentifier: String { String(describing: self) }
 
-    static func suitable(for item: Any) -> Bool { return item is Item }
+    static func suitable(for item: Any) -> Bool { item is Item }
 
     static func configure(
 
@@ -54,7 +54,7 @@ public class AnyCellFactory {
         configureCellClosure = cellFactory.configure(_:with:for:eventHandler:)
     }
 
-    func suitable(for item: Any) -> Bool { return suitableClosure(item) }
+    func suitable(for item: Any) -> Bool { suitableClosure(item) }
 
     func configure(
         _ cell: UITableViewCell,
@@ -62,7 +62,7 @@ public class AnyCellFactory {
         for indexPath: IndexPath,
         eventHandler: Any?
     ) -> UITableViewCell? {
-        return configureCellClosure(cell, item, indexPath, eventHandler)
+        configureCellClosure(cell, item, indexPath, eventHandler)
     }
 }
 
@@ -92,5 +92,5 @@ extension UITableView {
 }
 
 let cellFactoryFilter: (Any, [AnyCellFactory]) -> AnyCellFactory? = { item, factories in
-    return factories.first { $0.suitable(for: item) }
+    factories.first { $0.suitable(for: item) }
 }
