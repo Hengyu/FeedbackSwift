@@ -48,11 +48,7 @@ open class FeedbackViewController: UITableViewController {
     public init(configuration: FeedbackConfiguration) {
         self.configuration = configuration
 
-        if #available(iOS 13, *) {
-            super.init(style: .insetGrouped)
-        } else {
-            super.init(style: .grouped)
-        }
+        super.init(style: .insetGrouped)
 
         wireframe = FeedbackWireframe(
             viewController: self,
@@ -139,18 +135,16 @@ extension FeedbackViewController {
             wireframe.showAttachmentActionSheet(
                 cellRect: cell.superview!.convert(cell.frame, to: view),
                 authorizePhotoLibrary: { completion in
-                    PHPhotoLibrary.requestAuthorization { status in
+                    PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                         DispatchQueue.main.async {
                             completion(status == .authorized)
                         }
                     }
                 },
                 authorizeCamera: { completion in
-                    if #available(iOS 13.0, macCatalyst 14.0, *) {
-                        AVCaptureDevice.requestAccess(for: .video) { result in
-                            DispatchQueue.main.async {
-                                completion(result)
-                            }
+                    AVCaptureDevice.requestAccess(for: .video) { result in
+                        DispatchQueue.main.async {
+                            completion(result)
                         }
                     }
                 },

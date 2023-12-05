@@ -28,14 +28,12 @@ public class FeedbackItemsDataSource {
         sections.append(
             FeedbackItemsSection(items: [TopicItem(topics), BodyItem()])
         )
-        if #available(iOS 13.0, macCatalyst 14.0, *) {
-            sections.append(
-                FeedbackItemsSection(
-                    title: localized("feedback.AdditionalInfo"),
-                    items: [AttachmentItem(isHidden: hidesAttachmentCell)]
-                )
+        sections.append(
+            FeedbackItemsSection(
+                title: localized("feedback.AdditionalInfo"),
+                items: [AttachmentItem(isHidden: hidesAttachmentCell)]
             )
-        }
+        )
         sections.append(
             FeedbackItemsSection(
                 title: localized("feedback.DeviceInfo"),

@@ -6,6 +6,7 @@
 import UIKit
 import MobileCoreServices
 import MessageUI
+import UniformTypeIdentifiers
 
 protocol FeedbackWireframeProtocol {
     func showTopicsView(with service: FeedbackEditingServiceProtocol)
@@ -188,7 +189,7 @@ private extension FeedbackWireframe {
     func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = sourceType
-        imagePicker.mediaTypes = [kUTTypeImage as String, kUTTypeMovie as String]
+        imagePicker.mediaTypes = [UTType.image.identifier, UTType.movie.identifier]
         imagePicker.allowsEditing = false
         imagePicker.delegate = imagePickerDelegate
         imagePicker.modalPresentationStyle = .formSheet

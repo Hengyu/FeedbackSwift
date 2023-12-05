@@ -17,7 +17,7 @@
 
 ## Requirements
 
-- iOS 13.0+, macCatalyst 13.0+
+- iOS 14.0+, macCatalyst 14.0+
 
 ## Installation
 

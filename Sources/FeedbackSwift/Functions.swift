@@ -3,9 +3,10 @@
 // Copyright (c) 2017 CAPH TECH. All rights reserved.
 //
 
-import UIKit
-import MobileCoreServices
 import AVFoundation
+import MobileCoreServices
+import UIKit
+import UniformTypeIdentifiers
 
 func localized(_ key: String) -> String {
     #if SWIFT_PACKAGE && swift(>=5.3)
