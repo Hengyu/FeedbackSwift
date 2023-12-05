@@ -67,7 +67,9 @@ open class FeedbackViewController: UITableViewController {
 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44.0
+        #if os(iOS)
         tableView.keyboardDismissMode = .onDrag
+        #endif
         tableView.cellLayoutMarginsFollowReadableWidth = true
 
         cellFactories.forEach(tableView.register(with:))
@@ -278,13 +280,15 @@ extension FeedbackViewController: UIImagePickerControllerDelegate, UINavigationC
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
     ) {
-        switch getMediaFromImagePickerInfo(info) {
-        case let media?:
-            feedbackEditingService.update(attachmentMedia: media)
-            wireframe.dismiss(completion: .none)
-        case _:
-            wireframe.dismiss(completion: .none)
-            wireframe.showUnknownErrorAlert()
+        Task {
+            switch await getMediaFromImagePickerInfo(info) {
+            case let media?:
+                feedbackEditingService.update(attachmentMedia: media)
+                wireframe.dismiss(completion: .none)
+            case _:
+                wireframe.dismiss(completion: .none)
+                wireframe.showUnknownErrorAlert()
+            }
         }
     }
 

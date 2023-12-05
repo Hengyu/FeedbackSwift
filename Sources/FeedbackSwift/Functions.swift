@@ -27,16 +27,9 @@ func localized(_ key: String) -> String {
     return key
 }
 
-func getMediaFromImagePickerInfo(_ info: [UIImagePickerController.InfoKey: Any]) -> Media? {
-    let imageType: String
-    let movieType: String
-    if #available(iOS 14.0, macCatalyst 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *) {
-        imageType = UTType.image.identifier
-        movieType = UTType.movie.identifier
-    } else {
-        imageType = kUTTypeImage as String
-        movieType = kUTTypeMovie as String
-    }
+func getMediaFromImagePickerInfo(_ info: [UIImagePickerController.InfoKey: Any]) async -> Media? {
+    let imageType = UTType.image.identifier
+    let movieType = UTType.movie.identifier
 
     switch info[.mediaType] as? String {
     case imageType?:
@@ -44,19 +37,29 @@ func getMediaFromImagePickerInfo(_ info: [UIImagePickerController.InfoKey: Any])
         return .image(image)
     case movieType?:
         guard let url = info[.mediaURL] as? URL else { return nil }
-        return getMediaFromURL(url)
+        let image = try? await getMediaFromURL(url)
+        return image
     default: return nil
     }
 }
 
-func getMediaFromURL(_ url: URL) -> Media? {
+func getMediaFromURL(_ url: URL) async throws -> Media {
     let asset = AVURLAsset(url: url)
     let generator = AVAssetImageGenerator(asset: asset)
     generator.appliesPreferredTrackTransform = true
     let time = CMTimeMake(value: 1, timescale: 1)
-    guard let cgImage = try? generator.copyCGImage(at: time, actualTime: nil)
-    else { return nil }
-    return .video(UIImage(cgImage: cgImage), url)
+    #if os(visionOS)
+    let image = try await generator.image(at: time)
+    return Media.video(.init(cgImage: image.image), url)
+    #else
+    if #available(iOS 16.0, macCatalyst 16.0, *) {
+        let image = try await generator.image(at: time)
+        return Media.video(.init(cgImage: image.image), url)
+    } else {
+        let image = try generator.copyCGImage(at: time, actualTime: nil)
+        return .video(UIImage(cgImage: image), url)
+    }
+    #endif
 }
 
 func push<Item>(_ item: Item?) -> (((Item) -> Void) -> Void)? {

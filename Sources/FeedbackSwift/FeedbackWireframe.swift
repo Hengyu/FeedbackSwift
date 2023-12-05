@@ -95,6 +95,7 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
                     }
             )
         }
+        #if os(iOS)
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             alertController.addAction(
                 UIAlertAction(
@@ -109,6 +110,7 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
                         }
                     })
         }
+        #endif
 
         if let deleteAction {
             alertController.addAction(
@@ -229,7 +231,7 @@ private extension FeedbackWireframe {
     }
 
     private func openSettings() {
-        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+        #if os(iOS) || os(visionOS)
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(url)
         #endif
