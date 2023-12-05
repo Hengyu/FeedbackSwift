@@ -116,12 +116,14 @@ struct FeedbackGenerator {
 
     private static func platform() -> String {
         let platform: String
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(macOS)
         platform = "macOS"
         #elseif os(tvOS)
         platform = "tvOS"
         #elseif os(watchOS)
         platform = "watchOS"
+        #elseif os(visionOS)
+        platform = "visionOS"
         #else
         platform = "iOS"
         #endif
