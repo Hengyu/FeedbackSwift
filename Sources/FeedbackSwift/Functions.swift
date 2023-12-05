@@ -9,7 +9,7 @@ import UIKit
 import UniformTypeIdentifiers
 
 func localized(_ key: String) -> String {
-    #if SWIFT_PACKAGE && swift(>=5.3)
+    #if SWIFT_PACKAGE
     let bundles: [Bundle] = [Bundle.main, Bundle.feedbackBundle, Bundle.module]
     #else
     let bundles: [Bundle] = [Bundle.main, Bundle.feedbackBundle]
