@@ -84,15 +84,16 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
             alertController.addAction(
                 UIAlertAction(
                     title: localized("feedback.PhotoLibrary"),
-                    style: .default) { _ in
-                        authorizePhotoLibrary { granted in
-                            if granted {
-                                self.showImagePicker(sourceType: .photoLibrary)
-                            } else {
-                                self.showPhotoLibraryAuthorizingAlert()
-                            }
+                    style: .default
+                ) { _ in
+                    authorizePhotoLibrary { granted in
+                        if granted {
+                            self.showImagePicker(sourceType: .photoLibrary)
+                        } else {
+                            self.showPhotoLibraryAuthorizingAlert()
                         }
                     }
+                }
             )
         }
         #if os(iOS)
@@ -155,11 +156,14 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
     }
 
     func showMailComposingError(_ error: NSError) {
-        let alertController = UIAlertController(title: localized("feedback.Error"),
-                                                message: error.localizedDescription,
-                                                preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: localized("feedback.Dismiss"),
-                                                style: .cancel))
+        let alertController = UIAlertController(
+            title: localized("feedback.Error"),
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        alertController.addAction(
+            UIAlertAction(title: localized("feedback.Dismiss"), style: .cancel)
+        )
         viewController?.present(alertController, animated: true)
     }
 

@@ -6,6 +6,9 @@
 import UIKit
 
 public enum Media: Equatable {
+    case image(UIImage)
+    case video(UIImage, URL)
+
     var jpegData: Data? {
         guard case let .image(image) = self else { return .none }
         return image.jpegData(compressionQuality: 0.5)
@@ -14,8 +17,6 @@ public enum Media: Equatable {
         guard case let .video(_, url) = self else { return .none }
         return try? Data(contentsOf: url)
     }
-    case image(UIImage)
-    case video(UIImage, URL)
 
     public static func == (lhs: Media, rhs: Media) -> Bool {
         switch (lhs, rhs) {

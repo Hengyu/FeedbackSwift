@@ -34,10 +34,14 @@ class UserEmailCell: UITableViewCell {
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         textField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        textField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
-                                           constant: Const.Margin).isActive = true
-        textField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                            constant: Const.Margin).isActive = true
+        textField.leadingAnchor.constraint(
+            equalTo: contentView.leadingAnchor,
+            constant: Const.Margin
+        ).isActive = true
+        textField.trailingAnchor.constraint(
+            equalTo: contentView.trailingAnchor,
+            constant: Const.Margin
+        ).isActive = true
         textField.heightAnchor.constraint(equalToConstant: Const.Height).isActive = true
     }
 

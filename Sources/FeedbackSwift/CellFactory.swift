@@ -30,7 +30,8 @@ extension CellFactoryProtocol {
         _ cell: UITableViewCell,
         with item: Any,
         for indexPath: IndexPath,
-        eventHandler: Any?) -> UITableViewCell? {
+        eventHandler: Any?
+    ) -> UITableViewCell? {
             guard
                 let cell = cell as? Cell,
                 let item = item as? Item,

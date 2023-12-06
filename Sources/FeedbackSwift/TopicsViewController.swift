@@ -37,12 +37,14 @@ extension TopicsViewController {
         topics.count
     }
 
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let identifier = "Cell"
-        let cell       = tableView.dequeueReusableCell(withIdentifier: identifier)
-                         ?? UITableViewCell(style: .default, reuseIdentifier: identifier)
-        let topic      = topics[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier)
+        ??  UITableViewCell(style: .default, reuseIdentifier: identifier)
+        let topic = topics[indexPath.row]
         cell.textLabel?.text = topic.localizedTitle
         return cell
     }

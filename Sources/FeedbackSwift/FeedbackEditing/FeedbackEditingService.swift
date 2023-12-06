@@ -12,6 +12,7 @@ public protocol FeedbackEditingEventProtocol {
 public protocol FeedbackEditingServiceProtocol {
     var topics: [TopicProtocol] { get }
     var hasAttachedMedia: Bool { get }
+
     func update(userEmailText: String?)
     func update(bodyText: String?)
     func update(selectedTopic: TopicProtocol)

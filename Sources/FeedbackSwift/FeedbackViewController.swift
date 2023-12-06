@@ -100,13 +100,17 @@ extension FeedbackViewController {
         configuration.dataSource.numberOfSections
     }
 
-    override public func tableView(_ tableView: UITableView,
-                                   numberOfRowsInSection section: Int) -> Int {
+    override public func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         configuration.dataSource.section(at: section).count
     }
 
-    override public func tableView(_ tableView: UITableView,
-                                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override public func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         let item = configuration.dataSource.section(at: indexPath.section)[indexPath.row]
         return tableView.dequeueCell(
             to: item,
@@ -116,8 +120,10 @@ extension FeedbackViewController {
         )
     }
 
-    override public func tableView(_ tableView: UITableView,
-                                   titleForHeaderInSection section: Int) -> String? {
+    override public func tableView(
+        _ tableView: UITableView,
+        titleForHeaderInSection section: Int
+    ) -> String? {
         configuration.dataSource.section(at: section).title
     }
 }
@@ -298,9 +304,11 @@ extension FeedbackViewController: UIImagePickerControllerDelegate, UINavigationC
 }
 
 extension FeedbackViewController: MFMailComposeViewControllerDelegate {
-    public func mailComposeController(_ controller: MFMailComposeViewController,
-                                      didFinishWith result: MFMailComposeResult,
-                                      error: Error?) {
+    public func mailComposeController(
+        _ controller: MFMailComposeViewController,
+        didFinishWith result: MFMailComposeResult,
+        error: Error?
+    ) {
         if result == .failed, let error = error as NSError? {
             wireframe.showMailComposingError(error)
         }

@@ -39,8 +39,7 @@ class BodyCell: UITableViewCell {
 
     var height: CGFloat {
         let size = textView.sizeThatFits(
-            CGSize(width: textView.frame.width,
-                   height: CGFloat.greatestFiniteMagnitude)
+            CGSize(width: textView.frame.width, height: .greatestFiniteMagnitude)
         )
         return max(100.0, size.height)
     }

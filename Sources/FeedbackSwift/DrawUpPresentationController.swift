@@ -51,8 +51,10 @@ class DrawUpPresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let containerBounds = containerView?.bounds else { return CGRect.zero }
         var result = CGRect.zero
-        result.size = size(forChildContentContainer: presentedViewController,
-                           withParentContainerSize: containerBounds.size)
+        result.size = size(
+            forChildContentContainer: presentedViewController,
+            withParentContainerSize: containerBounds.size
+        )
         result.origin.y = containerBounds.height - result.height
         return result
     }
