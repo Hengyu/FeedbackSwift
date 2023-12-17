@@ -9,7 +9,6 @@ import UIKit
 import UniformTypeIdentifiers
 
 protocol FeedbackWireframeProtocol {
-    func showTopicsView(with service: FeedbackEditingServiceProtocol)
     func showMailComposer(with feedback: Feedback)
     func showAttachmentActionSheet(
         cellRect: CGRect,
@@ -26,31 +25,21 @@ protocol FeedbackWireframeProtocol {
 
 final class FeedbackWireframe {
     private weak var viewController: UIViewController?
-    private weak var transitioningDelegate: UIViewControllerTransitioningDelegate?
     private weak var imagePickerDelegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)?
     private weak var mailComposerDelegate: MFMailComposeViewControllerDelegate?
 
     init(
         viewController: UIViewController,
-        transitioningDelegate: UIViewControllerTransitioningDelegate,
         imagePickerDelegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate,
         mailComposerDelegate: MFMailComposeViewControllerDelegate
     ) {
         self.viewController = viewController
-        self.transitioningDelegate = transitioningDelegate
         self.imagePickerDelegate = imagePickerDelegate
         self.mailComposerDelegate = mailComposerDelegate
     }
 }
 
 extension FeedbackWireframe: FeedbackWireframeProtocol {
-    func showTopicsView(with service: FeedbackEditingServiceProtocol) {
-        let controller = TopicsViewController(service: service)
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = transitioningDelegate
-
-        DispatchQueue.main.async { self.viewController?.present(controller, animated: true) }
-    }
 
     func showMailComposer(with feedback: Feedback) {
         guard MFMailComposeViewController.canSendMail() else { return showMailConfigurationError() }

@@ -5,13 +5,27 @@
 
 import UIKit
 
+protocol TopicCellProtocol {
+    func topicCellOptionChanged(_ option: TopicProtocol)
+}
+
 final public class TopicCell: UITableViewCell {
+    private let button: UIButton = .init(type: .system)
+
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: TopicCell.reuseIdentifier)
+        commonInit()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        button.titleLabel?.font = .preferredFont(forTextStyle: .body)
+        button.showsMenuAsPrimaryAction = true
+        accessoryView = button
     }
 }
 
@@ -20,11 +34,18 @@ extension TopicCell: CellFactoryProtocol {
         _ cell: TopicCell,
         with item: TopicItem,
         for indexPath: IndexPath,
-        eventHandler: Any?
+        eventHandler: TopicCellProtocol?
     ) {
         cell.textLabel?.text = localized("feedback.Topic")
-        cell.detailTextLabel?.text = item.topicTitle
-        cell.accessoryType = .disclosureIndicator
+        cell.button.setTitle(item.topicTitle, for: .normal)
+        cell.button.menu = .init(
+            children: item.topics.map { topic in
+                UIAction(title: topic.localizedTitle) { action in
+                    eventHandler?.topicCellOptionChanged(topic)
+                }
+            }
+        )
+        cell.button.sizeToFit()
         cell.selectionStyle = .none
     }
 }

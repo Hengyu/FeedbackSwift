@@ -52,7 +52,6 @@ open class FeedbackViewController: UITableViewController {
 
         wireframe = FeedbackWireframe(
             viewController: self,
-            transitioningDelegate: self,
             imagePickerDelegate: self,
             mailComposerDelegate: self
         )
@@ -134,8 +133,6 @@ extension FeedbackViewController {
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = configuration.dataSource.section(at: indexPath.section)[indexPath.row]
         switch item {
-        case _ as TopicItem:
-            wireframe.showTopicsView(with: feedbackEditingService)
         case _ as AttachmentItem:
             guard let cell = tableView.cellForRow(at: indexPath) else {
                 fatalError("Can't get cell")
@@ -188,6 +185,12 @@ extension FeedbackViewController: BodyCellEventProtocol {
 
     func bodyTextDidChange(_ text: String?) {
         feedbackEditingService.update(bodyText: text)
+    }
+}
+
+extension FeedbackViewController: TopicCellProtocol {
+    func topicCellOptionChanged(_ option: TopicProtocol) {
+        feedbackEditingService.update(selectedTopic: option)
     }
 }
 
@@ -318,15 +321,5 @@ extension FeedbackViewController: MFMailComposeViewControllerDelegate {
         )
 
         mailComposeDelegate?.mailComposeController?(controller, didFinishWith: result, error: error)
-    }
-}
-
-extension FeedbackViewController: UIViewControllerTransitioningDelegate {
-    public func presentationController(
-        forPresented presented: UIViewController,
-        presenting: UIViewController?,
-        source: UIViewController
-    ) -> UIPresentationController? {
-        DrawUpPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
