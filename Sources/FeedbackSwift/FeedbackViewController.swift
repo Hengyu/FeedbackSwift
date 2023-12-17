@@ -204,7 +204,7 @@ extension FeedbackViewController {
             // https://stackoverflow.com/a/59317657/4402255
             parent?.title = localized("feedback.Feedback")
             parent?.navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: localized("feedback.Mail"),
+                image: .init(systemName: "arrow.up.circle.fill"),
                 style: .plain,
                 target: self,
                 action: #selector(mailButtonTapped(_:))
@@ -212,7 +212,7 @@ extension FeedbackViewController {
         } else {
             title = localized("feedback.Feedback")
             navigationItem.rightBarButtonItem = UIBarButtonItem(
-                title: localized("feedback.Mail"),
+                image: .init(systemName: "arrow.up.circle.fill"),
                 style: .plain,
                 target: self,
                 action: #selector(mailButtonTapped(_:))
