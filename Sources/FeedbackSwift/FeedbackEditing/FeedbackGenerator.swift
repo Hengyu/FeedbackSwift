@@ -50,7 +50,7 @@ struct FeedbackGenerator {
     }
 
     private static func generateSubject(appName: String, topic: TopicProtocol?) -> String {
-        String(format: "%@: %@", appName, topic?.title ?? "")
+        String(format: "%@: %@", appName, topic?.localizedTitle ?? "")
     }
 
     // swiftlint:disable function_parameter_count
