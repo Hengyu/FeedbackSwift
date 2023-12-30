@@ -26,6 +26,7 @@ final public class TopicCell: UITableViewCell {
         button.titleLabel?.font = .preferredFont(forTextStyle: .body)
         button.showsMenuAsPrimaryAction = true
         accessoryView = button
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
     }
 }
 
