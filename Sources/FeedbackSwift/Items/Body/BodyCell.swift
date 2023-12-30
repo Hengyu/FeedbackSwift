@@ -27,6 +27,7 @@ class BodyCell: UITableViewCell {
 
     let placeholederLabel: UILabel = {
         let result = UILabel()
+        result.textColor = .secondaryLabel
         result.text = localized("feedback.BodyPlaceholder")
         result.font = .systemFont(ofSize: 14.0)
         result.numberOfLines = 1
