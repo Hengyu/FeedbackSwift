@@ -5,9 +5,11 @@
 
 import Foundation
 
-struct UserEmailItem: FeedbackItemProtocol {
-    let isHidden: Bool
-    var email: String? = .none
+struct UserEmailItem: FeedbackUnit {
+    let display: Bool
+    var email: String?
 
-    init(isHidden: Bool) { self.isHidden = isHidden }
+    init(display: Bool) {
+        self.display = display
+    }
 }

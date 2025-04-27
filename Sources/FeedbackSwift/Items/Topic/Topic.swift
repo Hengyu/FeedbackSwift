@@ -5,24 +5,28 @@
 
 import Foundation
 
-public protocol TopicProtocol {
+public protocol TopicProtocol: Equatable, Sendable {
     var title: String { get }
     var localizedTitle: String { get }
 }
 
-enum Topic: String {
+public enum Topic: String, CaseIterable, Sendable {
     case question = "Question"
     case request = "Request"
     case bugReport = "Bug Report"
     case other = "Other"
+
+    public static var allCases: [Topic] {
+        [.question, .request, .bugReport, .other]
+    }
 }
 
 extension Topic: TopicProtocol {
-    var title: String {
+    public var title: String {
         rawValue
     }
 
-    var localizedTitle: String {
+    public var localizedTitle: String {
         localized(title)
     }
 }

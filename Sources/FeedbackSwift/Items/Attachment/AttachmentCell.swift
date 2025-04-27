@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol AttachmentCellEventProtocol {
+@MainActor protocol AttachmentCellEventProtocol {
     func showImage(of item: AttachmentItem)
 }
 
@@ -71,7 +71,9 @@ class AttachmentCell: UITableViewCell {
         accessoryType = .disclosureIndicator
     }
 
-    required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 }
 
 extension AttachmentCell {
@@ -92,7 +94,9 @@ extension AttachmentCell: CellFactoryProtocol {
 
         cell.imageView?.image = item.image
         if let heightConstraint = cell.attachmentImageViewHeightConstraint {
-            heightConstraint.constant = item.attached ? Const.AttachedCellHeight : Const.NoAttachedCellHeight
+            heightConstraint.constant = item.isAttached
+            ? Const.AttachedCellHeight
+            : Const.NoAttachedCellHeight
 
             if let image = cell.imageView?.image {
                 cell.attachmentImageViewWidthConstraint?.constant =

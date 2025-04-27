@@ -5,8 +5,8 @@
 
 import UIKit
 
-protocol CellFactoryProtocol {
-    associatedtype Item
+@MainActor protocol CellFactoryProtocol {
+    associatedtype Item: FeedbackUnit
     associatedtype Cell: UITableViewCell
     associatedtype EventHandler
 
@@ -21,49 +21,60 @@ protocol CellFactoryProtocol {
 }
 
 extension CellFactoryProtocol {
-    static var reuseIdentifier: String { String(describing: self) }
-
-    static func suitable(for item: Any) -> Bool { item is Item }
-
-    static func configure(
-
-        _ cell: UITableViewCell,
-        with item: Any,
-        for indexPath: IndexPath,
-        eventHandler: Any?
-    ) -> UITableViewCell? {
-            guard
-                let cell = cell as? Cell,
-                let item = item as? Item,
-                let eventHandler = eventHandler as? EventHandler
-            else { return .none }
-            configure(cell, with: item, for: indexPath, eventHandler: eventHandler)
-            return cell
-        }
-}
-
-public class AnyCellFactory {
-    let cellType: AnyClass
-    let reuseIdentifier: String
-    private let suitableClosure: (Any) -> Bool
-    private let configureCellClosure: (UITableViewCell, Any, IndexPath, Any?) -> UITableViewCell?
-
-    init<Factory: CellFactoryProtocol>(_ cellFactory: Factory.Type) {
-        cellType = Factory.Cell.self
-        reuseIdentifier = cellFactory.reuseIdentifier
-        suitableClosure = cellFactory.suitable(for:)
-        configureCellClosure = cellFactory.configure(_:with:for:eventHandler:)
+    static var cellType: AnyClass {
+        Cell.self
     }
 
-    func suitable(for item: Any) -> Bool { suitableClosure(item) }
+    static var reuseIdentifier: String {
+        String(describing: self)
+    }
 
-    func configure(
+    static func suitable(for item: Any) -> Bool {
+        item is Item
+    }
+
+    @discardableResult static func configure(
         _ cell: UITableViewCell,
-        with item: Any,
+        with item: any FeedbackUnit,
         for indexPath: IndexPath,
         eventHandler: Any?
-    ) -> UITableViewCell? {
-        configureCellClosure(cell, item, indexPath, eventHandler)
+    ) -> Bool {
+        guard
+            let cell = cell as? Cell,
+            let item = item as? Item,
+            let eventHandler = eventHandler as? EventHandler
+        else { return false }
+
+        configure(cell, with: item, for: indexPath, eventHandler: eventHandler)
+
+        return true
+    }
+}
+
+@MainActor public final class AnyCellFactory {
+    private let factory: any CellFactoryProtocol.Type
+
+    var cellType: AnyClass {
+        factory.cellType
+    }
+
+    var reuseIdentifier: String {
+        factory.reuseIdentifier
+    }
+
+    init<Factory: CellFactoryProtocol>(_ cellFactory: Factory.Type) {
+        factory = cellFactory
+    }
+
+    func suitable(for item: Any) -> Bool { factory.suitable(for: item) }
+
+    @discardableResult func configure(
+        _ cell: UITableViewCell,
+        with item: any FeedbackUnit,
+        for indexPath: IndexPath,
+        eventHandler: Any?
+    ) -> Bool {
+        factory.configure(cell, with: item, for: indexPath, eventHandler: eventHandler)
     }
 }
 
@@ -73,25 +84,17 @@ extension UITableView {
     }
 
     func dequeueCell(
-        to item: Any,
+        to item: any FeedbackUnit,
         from cellFactories: [AnyCellFactory],
         for indexPath: IndexPath,
-        filter: (Any, [AnyCellFactory]) -> AnyCellFactory? = cellFactoryFilter,
+        filter: (Any, [AnyCellFactory]) -> AnyCellFactory? = { item, factories in
+            factories.first { $0.suitable(for: item) }
+        },
         eventHandler: Any?
     ) -> UITableViewCell {
         guard let cellFactory = filter(item, cellFactories) else { fatalError() }
         let cell = dequeueReusableCell(withIdentifier: cellFactory.reuseIdentifier, for: indexPath)
-        guard let configured = cellFactory.configure(
-            cell,
-            with: item,
-            for: indexPath,
-            eventHandler: eventHandler
-        )
-        else { fatalError() }
-        return configured
+        cellFactory.configure(cell, with: item, for: indexPath, eventHandler: eventHandler)
+        return cell
     }
-}
-
-let cellFactoryFilter: (Any, [AnyCellFactory]) -> AnyCellFactory? = { item, factories in
-    factories.first { $0.suitable(for: item) }
 }

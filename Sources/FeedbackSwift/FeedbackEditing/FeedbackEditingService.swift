@@ -5,22 +5,22 @@
 
 import Foundation
 
-public protocol FeedbackEditingEventProtocol {
+@MainActor public protocol FeedbackEditingEventProtocol {
     func updated(at indexPath: IndexPath)
 }
 
-public protocol FeedbackEditingServiceProtocol {
-    var topics: [TopicProtocol] { get }
+@MainActor public protocol FeedbackEditingServiceProtocol {
+    var topics: [any TopicProtocol] { get }
     var hasAttachedMedia: Bool { get }
 
     func update(userEmailText: String?)
     func update(bodyText: String?)
-    func update(selectedTopic: TopicProtocol)
+    func update(selectedTopic: any TopicProtocol)
     func update(attachmentMedia: Media?)
-    func generateFeedback(configuration: FeedbackConfiguration) throws -> Feedback
+    func generateFeedback(configuration: FeedbackConfiguration) -> Feedback
 }
 
-public class FeedbackEditingService {
+public final class FeedbackEditingService {
     var editingItemsRepository: FeedbackEditingItemsRepositoryProtocol
     let feedbackEditingEventHandler: FeedbackEditingEventProtocol
 
@@ -34,7 +34,7 @@ public class FeedbackEditingService {
 }
 
 extension FeedbackEditingService: FeedbackEditingServiceProtocol {
-    public var topics: [TopicProtocol] {
+    public var topics: [any TopicProtocol] {
         guard let item = editingItemsRepository.item(of: TopicItem.self) else { return [] }
         return item.topics
     }
@@ -47,31 +47,34 @@ extension FeedbackEditingService: FeedbackEditingServiceProtocol {
     public func update(userEmailText: String?) {
         guard var item = editingItemsRepository.item(of: UserEmailItem.self) else { return }
         item.email = userEmailText
-        editingItemsRepository.set(item: item)
+        editingItemsRepository.set(item)
     }
 
     public func update(bodyText: String?) {
-        guard var item = editingItemsRepository.item(of: BodyItem.self) else { return }
-        item.bodyText = bodyText
-        editingItemsRepository.set(item: item)
+        guard let item = editingItemsRepository.item(of: BodyItem.self) else { return }
+
+        let newItem = BodyItem(display: item.display, bodyText: bodyText)
+        editingItemsRepository.set(newItem)
     }
 
-    public func update(selectedTopic: TopicProtocol) {
-        guard var item = editingItemsRepository.item(of: TopicItem.self) else { return }
-        item.selected = selectedTopic
-        guard let indexPath = editingItemsRepository.set(item: item) else { return }
+    public func update(selectedTopic: any TopicProtocol) {
+        guard let item = editingItemsRepository.item(of: TopicItem.self) else { return }
+
+        let newItem = TopicItem(item.topics, selection: selectedTopic)
+        guard let indexPath = editingItemsRepository.set(newItem) else { return }
         feedbackEditingEventHandler.updated(at: indexPath)
     }
 
     public func update(attachmentMedia: Media?) {
-        guard var item = editingItemsRepository.item(of: AttachmentItem.self) else { return }
-        item.media = attachmentMedia
-        guard let indexPath = editingItemsRepository.set(item: item) else { return }
+        guard let item = editingItemsRepository.item(of: AttachmentItem.self) else { return }
+
+        let newItem = AttachmentItem(display: item.display, media: attachmentMedia)
+        guard let indexPath = editingItemsRepository.set(newItem) else { return }
         feedbackEditingEventHandler.updated(at: indexPath)
     }
 
-    public func generateFeedback(configuration: FeedbackConfiguration) throws -> Feedback {
-        try FeedbackGenerator.generate(
+    public func generateFeedback(configuration: FeedbackConfiguration) -> Feedback {
+        FeedbackGenerator.generate(
             configuration: configuration,
             repository: editingItemsRepository
         )

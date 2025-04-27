@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol UserEmailCellEventProtocol {
+@MainActor protocol UserEmailCellEventProtocol {
     func userEmailTextDidChange(_ text: String?)
 }
 
-class UserEmailCell: UITableViewCell {
+final class UserEmailCell: UITableViewCell {
     private struct Const {
         static let FontSize: CGFloat = 14.0
         static let Margin: CGFloat = 15.0

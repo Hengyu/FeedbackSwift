@@ -5,16 +5,17 @@
 
 import UIKit
 
-public enum Media: Equatable {
+public enum Media: Equatable, Sendable {
     case image(UIImage)
     case video(UIImage, URL)
 
     var jpegData: Data? {
-        guard case let .image(image) = self else { return .none }
-        return image.jpegData(compressionQuality: 0.5)
+        guard case let .image(image) = self else { return nil }
+        return image.jpegData(compressionQuality: 1)
     }
+
     var videoData: Data? {
-        guard case let .video(_, url) = self else { return .none }
+        guard case let .video(_, url) = self else { return nil }
         return try? Data(contentsOf: url)
     }
 

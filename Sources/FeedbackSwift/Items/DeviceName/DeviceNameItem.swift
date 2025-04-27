@@ -5,28 +5,32 @@
 
 import Foundation
 
-public struct DeviceNameItem: FeedbackItemProtocol {
-    var deviceName: String {
+struct DeviceNameItem: FeedbackUnit {
+    let display: Bool
+
+    var name: String? {
         guard
             let path = Bundle.platformNamesPlistPath,
-            let dictionary = NSDictionary(contentsOfFile: path) as? [String: String]
-        else { return "" }
+            let dictionary = NSDictionary(contentsOfFile: path) as? [String: String],
+            let platform = getPlatform()
+        else { return nil }
 
-        let rawPlatform = platform
-        return dictionary[rawPlatform] ?? rawPlatform
+        return dictionary[platform] ?? platform
     }
 
-    private var platform: String {
+    init(display: Bool = true) {
+        self.display = display
+    }
+
+    private func getPlatform() -> String? {
         var systemInfo = utsname()
         uname(&systemInfo)
         guard let machine = withUnsafePointer(to: &systemInfo.machine, {
             $0.withMemoryRebound(to: CChar.self, capacity: 1) { ptr in
-                String.init(validatingUTF8: ptr)
+                String(validatingCString: ptr)
             }
-        }) else { return "Unknown" }
+        }) else { return nil }
 
         return machine
     }
-
-    public let isHidden: Bool = false
 }

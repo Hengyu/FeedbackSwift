@@ -5,24 +5,50 @@
 
 import UIKit
 
-public class FeedbackItemsDataSource {
-    var sections: [FeedbackItemsSection] = []
+public struct FeedbackUnitPreference: Equatable, Hashable, Sendable {
+    public let enablesUserEmail: Bool
+    public let enablesAttachment: Bool
+    public let enablesCameraPicker: Bool
+    public let showsAppInfo: Bool
+
+    public init(
+        enablesUserEmail: Bool = false,
+        enablesAttachment: Bool = true,
+        enablesCameraPicker: Bool = false,
+        showsAppInfo: Bool = false
+    ) {
+        self.enablesUserEmail = enablesUserEmail
+        self.enablesAttachment = enablesAttachment
+        self.enablesCameraPicker = enablesCameraPicker
+        self.showsAppInfo = showsAppInfo
+    }
+
+    public static let `default`: FeedbackUnitPreference = .init()
+}
+
+public final class FeedbackItemsDataSource: Equatable, @unchecked Sendable {
+
+    public let sections: [FeedbackItemsSection]
+
+    public static func == (lhs: FeedbackItemsDataSource, rhs: FeedbackItemsDataSource) -> Bool {
+        lhs.sections == rhs.sections
+    }
 
     var numberOfSections: Int {
         filteredSections.count
     }
 
+    private(set) var filteredSections: [FeedbackItemsSection]
+
     public init(
-        topics: [TopicProtocol],
-        hidesUserEmailCell: Bool = true,
-        hidesAttachmentCell: Bool = false,
-        hidesAppInfoSection: Bool = false,
-        appName: String? = nil
+        topics: [any TopicProtocol],
+        preference: FeedbackUnitPreference = .default
     ) {
+        var sections = [FeedbackItemsSection]()
         sections.append(
             FeedbackItemsSection(
                 title: localized("feedback.UserDetail"),
-                items: [UserEmailItem(isHidden: hidesUserEmailCell)]
+                items: [UserEmailItem(display: preference.enablesUserEmail)]
             )
         )
         sections.append(
@@ -31,7 +57,7 @@ public class FeedbackItemsDataSource {
         sections.append(
             FeedbackItemsSection(
                 title: localized("feedback.AdditionalInfo"),
-                items: [AttachmentItem(isHidden: hidesAttachmentCell)]
+                items: [AttachmentItem(display: preference.enablesAttachment)]
             )
         )
         sections.append(
@@ -44,12 +70,18 @@ public class FeedbackItemsDataSource {
             FeedbackItemsSection(
                 title: localized("feedback.AppInfo"),
                 items: [
-                    AppNameItem(isHidden: hidesAppInfoSection, name: appName),
-                        AppVersionItem(isHidden: hidesAppInfoSection),
-                        AppBuildItem(isHidden: hidesAppInfoSection),
+                    AppNameItem(display: preference.showsAppInfo),
+                    AppVersionItem(display: preference.showsAppInfo),
+                    AppBuildItem(display: preference.showsAppInfo),
                 ]
             )
         )
+
+        self.sections = sections
+
+        filteredSections = sections.filter { section in
+            !section.items.filter { $0.display }.isEmpty
+        }
     }
 
     func section(at section: Int) -> FeedbackItemsSection {
@@ -58,13 +90,7 @@ public class FeedbackItemsDataSource {
 }
 
 extension FeedbackItemsDataSource {
-    private var filteredSections: [FeedbackItemsSection] {
-        sections.filter { section in
-            section.items.filter { !$0.isHidden }.isEmpty == false
-        }
-    }
-
-    private subscript(indexPath: IndexPath) -> FeedbackItemProtocol {
+    private subscript(indexPath: IndexPath) -> any FeedbackUnit {
         get { filteredSections[indexPath.section][indexPath.item] }
         set { filteredSections[indexPath.section][indexPath.item] = newValue }
     }
@@ -72,7 +98,7 @@ extension FeedbackItemsDataSource {
     private func indexPath<Item>(of type: Item.Type) -> IndexPath? {
         let filtered = filteredSections
         for section in filtered {
-            guard let index = filtered.firstIndex(where: { $0 === section }),
+            guard let index = filtered.firstIndex(where: { $0 == section }),
                   let subIndex = section.items.firstIndex(where: { $0 is Item })
             else { continue }
             return IndexPath(item: subIndex, section: index)
@@ -88,31 +114,39 @@ extension FeedbackItemsDataSource: FeedbackEditingItemsRepositoryProtocol {
     }
 
     @discardableResult
-    public func set<Item: FeedbackItemProtocol>(item: Item) -> IndexPath? {
+    public func set<Item: FeedbackUnit>(_ item: Item) -> IndexPath? {
         guard let indexPath = indexPath(of: Item.self) else { return nil }
         self[indexPath] = item
         return indexPath
     }
 }
 
-class FeedbackItemsSection {
-    let title: String?
-    var items: [FeedbackItemProtocol]
+public struct FeedbackItemsSection: Equatable, Sendable {
+    public let title: String?
+    public var items: [any FeedbackUnit]
 
-    init(title: String? = nil, items: [FeedbackItemProtocol]) {
+    public init(title: String? = nil, items: [any FeedbackUnit]) {
         self.title = title
         self.items = items
+    }
+
+    public static func == (lhs: FeedbackItemsSection, rhs: FeedbackItemsSection) -> Bool {
+        lhs.title == rhs.title &&
+        lhs.items.count == rhs.items.count &&
+        lhs.enumerated().allSatisfy { offset, item in
+            item.id == rhs.items[offset].id
+        }
     }
 }
 
 extension FeedbackItemsSection: Collection {
-    var startIndex: Int { items.startIndex }
-    var endIndex: Int { items.endIndex }
+    public var startIndex: Int { items.startIndex }
+    public var endIndex: Int { items.endIndex }
 
-    subscript(position: Int) -> FeedbackItemProtocol {
+    public subscript(position: Int) -> any FeedbackUnit {
         get { items[position] }
         set { items[position] = newValue }
     }
 
-    func index(after index: Int) -> Int { items.index(after: index) }
+    public func index(after index: Int) -> Int { items.index(after: index) }
 }

@@ -9,21 +9,19 @@ struct FeedbackGenerator {
     static func generate(
         configuration: FeedbackConfiguration,
         repository: FeedbackEditingItemsRepositoryProtocol
-    ) throws -> Feedback {
-        guard
-            let deviceName = repository.item(of: DeviceNameItem.self)?.deviceName,
-            let systemVersion = repository.item(of: SystemVersionItem.self)?.version
-        else { throw FeedbackError.unknown }
+    ) -> Feedback {
+        let deviceName = repository.item(of: DeviceNameItem.self)?.name ?? ""
+        let systemVersion = repository.item(of: SystemVersionItem.self)?.version ?? ""
 
         let appName = repository.item(of: AppNameItem.self)?.name ?? ""
         let appVersion = repository.item(of: AppVersionItem.self)?.version ?? ""
-        let appBuild = repository.item(of: AppBuildItem.self)?.buildString ?? ""
+        let appBuild = repository.item(of: AppBuildItem.self)?.build ?? ""
         let email = repository.item(of: UserEmailItem.self)?.email
-        let topic = repository.item(of: TopicItem.self)?.selected
+        let topic = repository.item(of: TopicItem.self)?.selection
         let attachment = repository.item(of: AttachmentItem.self)?.media
         let body = repository.item(of: BodyItem.self)?.bodyText ?? ""
 
-        let subject = configuration.subject ?? generateSubject(appName: appName, topic: topic)
+        let subject = configuration.subject ?? String(format: "%@: %@", appName, topic?.localizedTitle ?? "")
 
         let format = configuration.usesHTML ? generateHTML : generateString
         let formattedBody = format(
@@ -47,10 +45,6 @@ struct FeedbackGenerator {
             jpeg: attachment?.jpegData,
             mp4: attachment?.videoData
         )
-    }
-
-    private static func generateSubject(appName: String, topic: TopicProtocol?) -> String {
-        String(format: "%@: %@", appName, topic?.localizedTitle ?? "")
     }
 
     // swiftlint:disable function_parameter_count

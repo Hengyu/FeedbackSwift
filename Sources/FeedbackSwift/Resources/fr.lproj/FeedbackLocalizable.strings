@@ -51,9 +51,9 @@
 "feedback.PhotoLibrary" = "Sélectionner depuis l'album";
 "feedback.UserDetail" = "User Detail";
 "feedback.Delete" = "Delete";
-"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+
 "feedback.UnknownError" = "Unknown Error";
-"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
-"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+"feedback.requiredCameraAccess" = "Camera access is required";
+"feedback.requiredLibraryAccess" = "Photo library access is required";
 
 "feedback.BodyPlaceholder" = "Entrez le texte ici...";

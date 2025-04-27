@@ -5,28 +5,25 @@
 
 import Foundation
 
-public class FeedbackConfiguration {
-    public var subject: String?
-    public var additionalDiagnosticContent: String?
-    public var toRecipients: [String]
-    public var ccRecipients: [String]
-    public var bccRecipients: [String]
-    public var usesHTML: Bool
+public struct FeedbackConfiguration: Equatable, Sendable {
+    public let subject: String?
+    public let additionalDiagnosticContent: String?
+    public let toRecipients: [String]
+    public let ccRecipients: [String]
+    public let bccRecipients: [String]
+    public let usesHTML: Bool
+    public let preference: FeedbackUnitPreference
     public var dataSource: FeedbackItemsDataSource
 
-    /// - Note: `hidesAttachmentCell` only takes effect on macCatalyst 14.0+.
     public init(
         subject: String? = .none,
-        additionalDiagnosticContent: String? = .none,
-        topics: [TopicProtocol] = TopicItem.defaultTopics,
+        additionalDiagnosticContent: String? = nil,
+        topics: [any TopicProtocol] = Topic.allCases,
         toRecipients: [String],
         ccRecipients: [String] = [],
         bccRecipients: [String] = [],
-        hidesUserEmailCell: Bool = true,
-        hidesAttachmentCell: Bool = false,
-        hidesAppInfoSection: Bool = false,
         usesHTML: Bool = false,
-        appName: String? = nil
+        preference: FeedbackUnitPreference
     ) {
         self.subject = subject
         self.additionalDiagnosticContent = additionalDiagnosticContent
@@ -34,12 +31,10 @@ public class FeedbackConfiguration {
         self.ccRecipients = ccRecipients
         self.bccRecipients = bccRecipients
         self.usesHTML = usesHTML
+        self.preference = preference
         self.dataSource = FeedbackItemsDataSource(
             topics: topics,
-            hidesUserEmailCell: hidesUserEmailCell,
-            hidesAttachmentCell: hidesAttachmentCell,
-            hidesAppInfoSection: hidesAppInfoSection,
-            appName: appName
+            preference: preference
         )
     }
 }

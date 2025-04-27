@@ -1,5 +1,5 @@
 //
-//  AppNameCell.swift
+//  AppBuildCell.swift
 //  CTFeedbackSwift
 //
 //  Created by 和泉田 領一 on 2017/09/24.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppNameCell: UITableViewCell {
+final class AppBuildCell: UITableViewCell {
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
     }
@@ -18,15 +18,15 @@ class AppNameCell: UITableViewCell {
     }
 }
 
-extension AppNameCell: CellFactoryProtocol {
+extension AppBuildCell: CellFactoryProtocol {
     class func configure(
-        _ cell: AppNameCell,
-        with item: AppNameItem,
+        _ cell: AppBuildCell,
+        with item: AppBuildItem,
         for indexPath: IndexPath,
         eventHandler: Any?
     ) {
-        cell.textLabel?.text = localized("feedback.Name")
-        cell.detailTextLabel?.text = item.name
+        cell.textLabel?.text = localized("feedback.Build")
+        cell.detailTextLabel?.text = item.build
         cell.selectionStyle = .none
     }
 }

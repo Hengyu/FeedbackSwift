@@ -5,29 +5,20 @@
 
 import Foundation
 
-public struct TopicItem: FeedbackItemProtocol {
-    public static var defaultTopics: [TopicProtocol] {
-        [
-            Topic.question,
-            Topic.request,
-            Topic.bugReport,
-            Topic.other,
-        ]
+struct TopicItem: FeedbackUnit {
+    let topics: [any TopicProtocol]
+
+    var title: String? {
+        selection?.localizedTitle
     }
 
-    var topicTitle: String {
-        selected?.localizedTitle ?? topics.first?.localizedTitle ?? ""
-    }
-    var topics: [TopicProtocol] = []
-    var selected: TopicProtocol? {
-        get { _selected ?? topics.first }
-        set { _selected = newValue }
-    }
-    private var _selected: TopicProtocol?
-    public let isHidden: Bool
+    let selection: (any TopicProtocol)?
 
-    init(_ topics: [TopicProtocol]) {
+    let display: Bool
+
+    init(_ topics: [any TopicProtocol], selection: (any TopicProtocol)? = nil) {
         self.topics = topics
-        self.isHidden = topics.isEmpty
+        display = !topics.isEmpty
+        self.selection = selection ?? topics.first
     }
 }

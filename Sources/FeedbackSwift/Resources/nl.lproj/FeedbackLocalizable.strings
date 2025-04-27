@@ -53,10 +53,10 @@
 "feedback.UserDetail" = "Gebruiker detail";
 
 "feedback.UserDetail" = "User Detail";
-"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
+
 "feedback.UnknownError" = "Unknown Error";
 "feedback.Delete" = "Delete";
-"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
-"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+"feedback.requiredCameraAccess" = "Camera access is required";
+"feedback.requiredLibraryAccess" = "Photo library access is required";
 
 "feedback.BodyPlaceholder" = "Voeg hier tekst in...";

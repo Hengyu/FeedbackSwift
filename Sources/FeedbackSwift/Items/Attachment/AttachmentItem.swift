@@ -5,21 +5,26 @@
 
 import UIKit
 
-struct AttachmentItem: FeedbackItemProtocol {
-    var attached: Bool {
+struct AttachmentItem: FeedbackUnit {
+    var isAttached: Bool {
         media != nil
     }
-    var media: Media?
+
     var image: UIImage? {
         switch media {
-        case .image(let image)?:    return image
-        case .video(let image, _)?: return image
+        case .image(let image):
+            return image
+        case .video(let image, _):
+            return image
         default: return nil
         }
     }
-    let isHidden: Bool
 
-    init(isHidden: Bool) {
-        self.isHidden = isHidden
+    let display: Bool
+    let media: Media?
+
+    init(display: Bool, media: Media? = nil) {
+        self.display = display
+        self.media = media
     }
 }

@@ -5,37 +5,42 @@
 
 import MessageUI
 import MobileCoreServices
+import PhotosUI
 import UIKit
 import UniformTypeIdentifiers
 
-protocol FeedbackWireframeProtocol {
+@MainActor protocol FeedbackWireframeProtocol {
     func showMailComposer(with feedback: Feedback)
     func showAttachmentActionSheet(
-        cellRect: CGRect,
         authorizePhotoLibrary: @escaping (@escaping (Bool) -> Void) -> Void,
         authorizeCamera: @escaping (@escaping (Bool) -> Void) -> Void,
         deleteAction: (() -> Void)?
     )
-    func showFeedbackGenerationError()
-    func showUnknownErrorAlert()
-    func showMailComposingError(_ error: NSError)
+    func showError(_ error: Error?)
     func dismiss(completion: (() -> Void)?)
     func pop()
 }
 
-final class FeedbackWireframe {
+@MainActor final class FeedbackWireframe {
     private weak var viewController: UIViewController?
-    private weak var imagePickerDelegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)?
+    private weak var imagePickerDelegate: (UIImagePickerControllerDelegate
+                                           & PHPickerViewControllerDelegate
+                                           & UINavigationControllerDelegate)?
     private weak var mailComposerDelegate: MFMailComposeViewControllerDelegate?
+    private let enablesCameraPicker: Bool
 
     init(
         viewController: UIViewController,
-        imagePickerDelegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate,
-        mailComposerDelegate: MFMailComposeViewControllerDelegate
+        imagePickerDelegate: UIImagePickerControllerDelegate
+        & PHPickerViewControllerDelegate
+        & UINavigationControllerDelegate,
+        mailComposerDelegate: MFMailComposeViewControllerDelegate,
+        enablesCameraPicker: Bool
     ) {
         self.viewController = viewController
         self.imagePickerDelegate = imagePickerDelegate
         self.mailComposerDelegate = mailComposerDelegate
+        self.enablesCameraPicker = enablesCameraPicker
     }
 }
 
@@ -59,34 +64,31 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
     }
 
     func showAttachmentActionSheet(
-        cellRect: CGRect,
         authorizePhotoLibrary: @escaping (@escaping (Bool) -> Void) -> Void,
         authorizeCamera: @escaping (@escaping (Bool) -> Void) -> Void,
         deleteAction: (() -> Void)?
     ) {
         let alertController = UIAlertController(
             title: .none,
-            message: .none,
-            preferredStyle: .actionSheet
+            message: localized("feedback.AttachImageOrVideo"),
+            preferredStyle: .alert
         )
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            alertController.addAction(
-                UIAlertAction(
-                    title: localized("feedback.PhotoLibrary"),
-                    style: .default
-                ) { _ in
-                    authorizePhotoLibrary { granted in
-                        if granted {
-                            self.showImagePicker(sourceType: .photoLibrary)
-                        } else {
-                            self.showPhotoLibraryAuthorizingAlert()
-                        }
+        alertController.addAction(
+            UIAlertAction(
+                title: localized("feedback.PhotoLibrary"),
+                style: .default
+            ) { _ in
+                authorizePhotoLibrary { granted in
+                    if granted {
+                        self.showPhotoPicker()
+                    } else {
+                        self.showPhotoLibraryAuthorizingAlert()
                     }
                 }
-            )
-        }
+            }
+        )
         #if os(iOS)
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera), enablesCameraPicker {
             alertController.addAction(
                 UIAlertAction(title: localized("feedback.Camera"), style: .default) { _ in
                     authorizeCamera { granted in
@@ -111,43 +113,13 @@ extension FeedbackWireframe: FeedbackWireframeProtocol {
 
         alertController.addAction(UIAlertAction(title: localized("feedback.Cancel"), style: .cancel))
 
-        alertController.popoverPresentationController?.sourceView = viewController?.view
-        alertController.popoverPresentationController?.sourceRect = cellRect
-        alertController.popoverPresentationController?.permittedArrowDirections = .any
-
         viewController?.present(alertController, animated: true)
     }
 
-    func showFeedbackGenerationError() {
-        let alert = UIAlertController(
-            title: localized("feedback.Error"),
-            message:
-                localized("feedback.FeedbackGenerationErrorMessage"),
-            preferredStyle: .alert
-        )
-        alert.addAction(
-            UIAlertAction(title: localized("feedback.Dismiss"), style: .cancel)
-        )
-        viewController?.present(alert, animated: true)
-    }
-
-    func showUnknownErrorAlert() {
-        let title = localized("feedback.UnknownError")
+    func showError(_ error: Error?) {
         let alertController = UIAlertController(
-            title: title,
-            message: .none,
-            preferredStyle: .alert
-        )
-        alertController.addAction(
-            UIAlertAction(title: localized("feedback.Dismiss"), style: .default)
-        )
-        viewController?.present(alertController, animated: true)
-    }
-
-    func showMailComposingError(_ error: NSError) {
-        let alertController = UIAlertController(
-            title: localized("feedback.Error"),
-            message: error.localizedDescription,
+            title: error == nil ? localized("feedback.UnknownError") : localized("feedback.Error"),
+            message: error?.localizedDescription,
             preferredStyle: .alert
         )
         alertController.addAction(
@@ -177,16 +149,24 @@ private extension FeedbackWireframe {
 
     func showImagePicker(sourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
+        #if os(macOS) || targetEnvironment(macCatalyst)
+        imagePicker.cameraDevice = .front
+        #endif
         imagePicker.sourceType = sourceType
         imagePicker.mediaTypes = [UTType.image.identifier, UTType.movie.identifier]
         imagePicker.allowsEditing = false
         imagePicker.delegate = imagePickerDelegate
         imagePicker.modalPresentationStyle = .formSheet
-        let presentation = imagePicker.popoverPresentationController
-        presentation?.permittedArrowDirections = .any
-        presentation?.sourceView = viewController?.view
-        presentation?.sourceRect = viewController?.view.frame ?? CGRect.zero
         viewController?.present(imagePicker, animated: true)
+    }
+
+    func showPhotoPicker() {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        configuration.selectionLimit = 1
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = imagePickerDelegate
+        viewController?.present(picker, animated: true)
     }
 
     func showPhotoLibraryAuthorizingAlert() {
@@ -218,9 +198,14 @@ private extension FeedbackWireframe {
     }
 
     private func openSettings() {
-        #if os(iOS) || os(visionOS)
-        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        UIApplication.shared.open(url)
+        #if os(macOS) || targetEnvironment(macCatalyst)
+        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy") {
+            UIApplication.shared.open(url)
+        }
+        #elseif os(iOS) || os(visionOS)
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(url)
+        }
         #endif
     }
 }

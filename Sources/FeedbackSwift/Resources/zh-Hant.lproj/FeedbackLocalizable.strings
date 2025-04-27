@@ -20,7 +20,7 @@
 
 "feedback.Version" = "版本";
 
-"feedback.Build" = "Build";
+"feedback.Build" = "建置版本";
 
 "feedback.DeviceInfo" = "設備資訊";
 
@@ -51,11 +51,11 @@
 "feedback.Ok" = "好的";
 
 "feedback.PhotoLibrary" ="從相冊中選取";
-"feedback.UserDetail" = "User Detail";
-"feedback.FeedbackGenerationErrorMessage" = "Feedback Generation Error";
-"feedback.UnknownError" = "Unknown Error";
-"feedback.Delete" = "Delete";
-"feedback.requiredCameraAccess" = "Camera access is absolutely necessary to use this app";
-"feedback.requiredLibraryAccess" = "Library access is absolutely necessary to use this app";
+"feedback.UserDetail" = "用戶詳細資訊";
+
+"feedback.UnknownError" = "未知錯誤";
+"feedback.Delete" = "刪除";
+"feedback.requiredCameraAccess" = "需要相機使用權限";
+"feedback.requiredLibraryAccess" = "需要相簿存取權限";
 
 "feedback.BodyPlaceholder" = "在此輸入文字...";

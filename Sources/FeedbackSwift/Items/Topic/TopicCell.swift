@@ -5,8 +5,8 @@
 
 import UIKit
 
-protocol TopicCellProtocol {
-    func topicCellOptionChanged(_ option: TopicProtocol)
+@MainActor protocol TopicCellProtocol {
+    func topicCellOptionChanged(_ option: any TopicProtocol)
 }
 
 final public class TopicCell: UITableViewCell {
@@ -38,10 +38,10 @@ extension TopicCell: CellFactoryProtocol {
         eventHandler: TopicCellProtocol?
     ) {
         cell.textLabel?.text = localized("feedback.Topic")
-        cell.button.setTitle(item.topicTitle, for: .normal)
+        cell.button.setTitle(item.title, for: .normal)
         cell.button.menu = .init(
             children: item.topics.map { topic in
-                UIAction(title: topic.localizedTitle) { action in
+                UIAction(title: topic.localizedTitle) { _ in
                     eventHandler?.topicCellOptionChanged(topic)
                 }
             }

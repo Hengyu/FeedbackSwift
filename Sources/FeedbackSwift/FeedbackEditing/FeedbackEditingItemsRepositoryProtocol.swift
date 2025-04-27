@@ -9,5 +9,5 @@ public protocol FeedbackEditingItemsRepositoryProtocol {
     func item<Item>(of type: Item.Type) -> Item?
 
     @discardableResult
-    func set<Item: FeedbackItemProtocol>(item: Item) -> IndexPath?
+    func set<Item: FeedbackUnit>(_ item: Item) -> IndexPath?
 }

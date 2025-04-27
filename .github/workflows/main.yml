@@ -8,18 +8,16 @@ on:
 
 jobs:
   main:
-    runs-on: macos-13
+    runs-on: macos-15
     steps:
-      - name: Select Xcode version
-        run: sudo xcode-select -s '/Applications/Xcode_15.0.1.app/Contents/Developer'
-      - uses: swift-actions/setup-swift@v1
+      - uses: swift-actions/setup-swift@v2
         with:
-          swift-version: "5.9.0"
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+          swift-version: "6.0"
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: .build
           key: ${{ runner.os }}-FeedbackSwift-${{ hashFiles('**/Package.resolved') }}
           restore-keys: ${{ runner.os }}-FeedbackSwift
       - name: Build
-        run: xcodebuild build -scheme FeedbackSwift -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14"
+        run: xcodebuild build -scheme FeedbackSwift -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 16"

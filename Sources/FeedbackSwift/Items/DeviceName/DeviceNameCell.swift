@@ -8,13 +8,19 @@
 
 import UIKit
 
-class DeviceNameCell: UITableViewCell {
+final class DeviceNameCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        commonInit()
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
     }
 }
 
@@ -28,7 +34,7 @@ extension DeviceNameCell: CellFactoryProtocol {
         eventHandler: Any?
     ) {
         cell.textLabel?.text = localized("feedback.Device")
-        cell.detailTextLabel?.text = item.deviceName
+        cell.detailTextLabel?.text = item.name
         cell.selectionStyle = .none
     }
 }

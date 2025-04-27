@@ -5,7 +5,12 @@
 
 import Foundation
 
-struct BodyItem: FeedbackItemProtocol {
-    var bodyText: String?
-    let isHidden: Bool = false
+struct BodyItem: FeedbackUnit {
+    let display: Bool
+    let bodyText: String?
+
+    init(display: Bool = true, bodyText: String? = nil) {
+        self.display = display
+        self.bodyText = bodyText
+    }
 }

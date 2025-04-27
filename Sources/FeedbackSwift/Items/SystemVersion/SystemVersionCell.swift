@@ -8,13 +8,19 @@
 
 import UIKit
 
-class SystemVersionCell: UITableViewCell {
+final class SystemVersionCell: UITableViewCell {
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
+        commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+
+    private func commonInit() {
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
     }
 }
 
@@ -25,10 +31,12 @@ extension SystemVersionCell: CellFactoryProtocol {
         for indexPath: IndexPath,
         eventHandler: Any?
     ) {
-        #if targetEnvironment(macCatalyst)
+        #if os(macOS) || targetEnvironment(macCatalyst)
         cell.textLabel?.text = "macOS"
-        #else
-        cell.textLabel?.text = localized("feedback.iOS")
+        #elseif os(iOS)
+        cell.textLabel?.text = "iOS"
+        #elseif os(visionOS)
+        cell.textLabel?.text = "visionOS"
         #endif
         cell.detailTextLabel?.text = item.version
         cell.selectionStyle = .none

@@ -5,7 +5,14 @@
 
 import UIKit
 
-struct SystemVersionItem: FeedbackItemProtocol {
-    var version: String { UIDevice.current.systemVersion }
-    let isHidden: Bool = false
+struct SystemVersionItem: FeedbackUnit {
+    let display: Bool
+
+    var version: String {
+        ProcessInfo.processInfo.operatingSystemVersionString
+    }
+
+    init(display: Bool = true) {
+        self.display = display
+    }
 }

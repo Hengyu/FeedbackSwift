@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol BodyCellEventProtocol {
+@MainActor protocol BodyCellEventProtocol {
     func bodyCellHeightChanged()
     func bodyTextDidChange(_ text: String?)
 }
 
-class BodyCell: UITableViewCell {
+final class BodyCell: UITableViewCell {
     var eventHandler: BodyCellEventProtocol?
 
     let textView: UITextView = {

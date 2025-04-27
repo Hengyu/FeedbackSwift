@@ -6,15 +6,9 @@
 import Dispatch
 import Foundation
 
-var storedFeedbackBundle: Bundle?
-
 extension Bundle {
     static var feedbackBundle: Bundle {
-        if let bundle = storedFeedbackBundle { return bundle }
-
-        let bundle = Bundle(for: FeedbackViewController.self)
-        storedFeedbackBundle = bundle
-        return bundle
+        Bundle(for: FeedbackViewController.self)
     }
 
     static var platformNamesPlistPath: String? {

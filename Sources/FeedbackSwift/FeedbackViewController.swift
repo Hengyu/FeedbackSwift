@@ -9,9 +9,10 @@
 import Dispatch
 import MessageUI
 import Photos
+import PhotosUI
 import UIKit
 
-open class FeedbackViewController: UITableViewController {
+public final class FeedbackViewController: UITableViewController {
     public var mailComposeDelegate: MFMailComposeViewControllerDelegate?
     public var replacedFeedbackSendingAction: ((Feedback) -> Void)?
     public var feedbackDidFailed: ((MFMailComposeResult, NSError) -> Void)?
@@ -19,7 +20,12 @@ open class FeedbackViewController: UITableViewController {
         didSet { updateDataSource(configuration: configuration) }
     }
 
-    internal var wireframe: FeedbackWireframeProtocol!
+    internal lazy var wireframe: FeedbackWireframeProtocol = FeedbackWireframe(
+        viewController: self,
+        imagePickerDelegate: self,
+        mailComposerDelegate: self,
+        enablesCameraPicker: configuration.preference.enablesCameraPicker
+    )
 
     private let cellFactories = [
         AnyCellFactory(UserEmailCell.self),
@@ -47,18 +53,12 @@ open class FeedbackViewController: UITableViewController {
 
     public init(configuration: FeedbackConfiguration) {
         self.configuration = configuration
-
         super.init(style: .insetGrouped)
-
-        wireframe = FeedbackWireframe(
-            viewController: self,
-            imagePickerDelegate: self,
-            mailComposerDelegate: self
-        )
     }
 
-    public required init?(coder aDecoder: NSCoder) {
-        fatalError()
+    public required init?(coder: NSCoder) {
+        configuration = .init(toRecipients: [], preference: .default)
+        super.init(coder: coder)
     }
 
     public override func viewDidLoad() {
@@ -71,7 +71,9 @@ open class FeedbackViewController: UITableViewController {
         #endif
         tableView.cellLayoutMarginsFollowReadableWidth = true
 
-        cellFactories.forEach(tableView.register(with:))
+        cellFactories.forEach { factory in
+            tableView.register(with: factory)
+        }
         updateDataSource(configuration: configuration)
     }
 
@@ -138,26 +140,50 @@ extension FeedbackViewController {
                 fatalError("Can't get cell")
             }
             wireframe.showAttachmentActionSheet(
-                cellRect: cell.superview!.convert(cell.frame, to: view),
-                authorizePhotoLibrary: { completion in
-                    PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
-                        DispatchQueue.main.async {
-                            completion(status == .authorized)
-                        }
-                    }
-                },
-                authorizeCamera: { completion in
-                    AVCaptureDevice.requestAccess(for: .video) { result in
-                        DispatchQueue.main.async {
-                            completion(result)
-                        }
-                    }
-                },
+                authorizePhotoLibrary: authorizePhotoLibrary(handler:),
+                authorizeCamera: authorizeCamera(handler:),
                 deleteAction: attachmentDeleteAction
             )
         default: break
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    private func authorizePhotoLibrary(handler: @escaping (Bool) -> Void) {
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        switch status {
+        case .notDetermined:
+            Task {
+                let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
+                handler(status == .authorized || status == .limited)
+            }
+        case .authorized, .limited:
+            handler(true)
+        case .restricted, .denied:
+            handler(false)
+        @unknown default:
+            handler(false)
+        }
+    }
+
+    private func authorizeCamera(handler: @escaping (Bool) -> Void) {
+        let status = AVCaptureDevice.authorizationStatus(for: .audio)
+        switch status {
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { result in
+                DispatchQueue.main.async {
+                    handler(result)
+                }
+            }
+        case .authorized:
+            handler(true)
+        case .restricted:
+            handler(false)
+        case .denied:
+            handler(false)
+        @unknown default:
+            handler(false)
+        }
     }
 }
 
@@ -189,7 +215,7 @@ extension FeedbackViewController: BodyCellEventProtocol {
 }
 
 extension FeedbackViewController: TopicCellProtocol {
-    func topicCellOptionChanged(_ option: TopicProtocol) {
+    func topicCellOptionChanged(_ option: any TopicProtocol) {
         feedbackEditingService.update(selectedTopic: option)
     }
 }
@@ -263,12 +289,8 @@ extension FeedbackViewController {
 
     @objc
     func mailButtonTapped(_ sender: Any) {
-        do {
-            let feedback = try feedbackEditingService.generateFeedback(configuration: configuration)
-            (replacedFeedbackSendingAction ?? wireframe.showMailComposer(with:))(feedback)
-        } catch {
-            wireframe.showFeedbackGenerationError()
-        }
+        let feedback = feedbackEditingService.generateFeedback(configuration: configuration)
+        (replacedFeedbackSendingAction ?? wireframe.showMailComposer(with:))(feedback)
     }
 
     private func terminate(_ result: MFMailComposeResult, _ error: Error?) {
@@ -296,24 +318,45 @@ extension FeedbackViewController: UIImagePickerControllerDelegate, UINavigationC
                 wireframe.dismiss(completion: .none)
             case _:
                 wireframe.dismiss(completion: .none)
-                wireframe.showUnknownErrorAlert()
+                wireframe.showError(nil)
             }
         }
     }
 
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        wireframe.dismiss(completion: .none)
+        wireframe.dismiss(completion: nil)
     }
 }
 
-extension FeedbackViewController: MFMailComposeViewControllerDelegate {
+extension FeedbackViewController: PHPickerViewControllerDelegate {
+    public func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let itemProvider = results.first?.itemProvider else { return }
+
+        if itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
+                let uiImage = image as? UIImage
+                DispatchQueue.main.async {
+                    guard let self else { return }
+                    if let uiImage {
+                        self.feedbackEditingService.update(attachmentMedia: .image(uiImage))
+                    } else if error != nil {
+                        self.wireframe.showError(nil)
+                    }
+                }
+            }
+        }
+    }
+}
+
+extension FeedbackViewController: @preconcurrency MFMailComposeViewControllerDelegate {
     public func mailComposeController(
         _ controller: MFMailComposeViewController,
         didFinishWith result: MFMailComposeResult,
         error: Error?
     ) {
-        if result == .failed, let error = error as NSError? {
-            wireframe.showMailComposingError(error)
+        if result == .failed, let error {
+            wireframe.showError(error)
         }
 
         wireframe.dismiss(
