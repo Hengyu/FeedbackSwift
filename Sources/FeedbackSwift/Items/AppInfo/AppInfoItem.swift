@@ -5,39 +5,21 @@
 
 import Foundation
 
-struct AppNameItem: FeedbackUnit {
-    let display: Bool
-
-    var name: String? {
+struct AppNameItem {
+    static var name: String? {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ??
         Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
     }
-
-    init(display: Bool) {
-        self.display = display
-    }
 }
 
-struct AppVersionItem: FeedbackUnit {
-    let display: Bool
-
-    var version: String? {
+struct AppVersionItem {
+    static var version: String? {
         Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
     }
-
-    init(display: Bool) {
-        self.display = display
-    }
 }
 
-struct AppBuildItem: FeedbackUnit {
-    let display: Bool
-
-    var build: String? {
+struct AppBuildItem {
+    static var build: String? {
         Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String
-    }
-
-    init(display: Bool) {
-        self.display = display
     }
 }

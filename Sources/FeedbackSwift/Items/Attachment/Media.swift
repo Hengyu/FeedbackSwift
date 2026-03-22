@@ -3,11 +3,11 @@
 // Copyright (c) 2017 CAPH TECH. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public enum Media: Equatable, Sendable {
-    case image(UIImage)
-    case video(UIImage, URL)
+    case image(PlatformImage)
+    case video(PlatformImage, URL)
 
     var jpegData: Data? {
         guard case let .image(image) = self else { return nil }

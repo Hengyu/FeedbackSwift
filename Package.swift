@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "FeedbackSwift",
     defaultLocalization: "en",
-    platforms: [.iOS(.v14), .macCatalyst(.v14), .visionOS(.v1)],
+    platforms: [.iOS(.v17), .macCatalyst(.v17), .macOS(.v14), .tvOS(.v17), .visionOS(.v1)],
     products: [
         .library(name: "FeedbackSwift", targets: ["FeedbackSwift"])
     ],
@@ -14,7 +14,8 @@ let package = Package(
         .target(
             name: "FeedbackSwift",
             resources: [
-                .copy("Resources/PlatformNames.plist")
+                .copy("Resources/PlatformNames.plist"),
+                .process("Resources/localizable.xcstrings")
             ]
         ),
         .testTarget(name: "FeedbackSwiftTests", dependencies: ["FeedbackSwift"]),

@@ -92,10 +92,40 @@
 	<string>iPhone 14</string>
 	<key>iPhone14,8</key>
 	<string>iPhone 14 Plus</string>
+	<key>iPhone14,6</key>
+	<string>iPhone SE (3rd Gen)</string>
 	<key>iPhone15,2</key>
 	<string>iPhone 14 Pro</string>
 	<key>iPhone15,3</key>
 	<string>iPhone 14 Pro Max</string>
+	<key>iPhone15,4</key>
+	<string>iPhone 15</string>
+	<key>iPhone15,5</key>
+	<string>iPhone 15 Plus</string>
+	<key>iPhone16,1</key>
+	<string>iPhone 15 Pro</string>
+	<key>iPhone16,2</key>
+	<string>iPhone 15 Pro Max</string>
+	<key>iPhone17,1</key>
+	<string>iPhone 16 Pro</string>
+	<key>iPhone17,2</key>
+	<string>iPhone 16 Pro Max</string>
+	<key>iPhone17,3</key>
+	<string>iPhone 16</string>
+	<key>iPhone17,4</key>
+	<string>iPhone 16 Plus</string>
+	<key>iPhone17,5</key>
+	<string>iPhone 16e</string>
+	<key>iPhone18,1</key>
+	<string>iPhone Air</string>
+	<key>iPhone18,2</key>
+	<string>iPhone 17</string>
+	<key>iPhone18,3</key>
+	<string>iPhone 17 Pro</string>
+	<key>iPhone18,4</key>
+	<string>iPhone 17 Pro Max</string>
+	<key>iPhone18,5</key>
+	<string>iPhone 17e</string>
 	<key>iPod1,1</key>
 	<string>iPod Touch 1G</string>
 	<key>iPod2,1</key>
@@ -188,6 +218,10 @@
 	<string>iPad (6th generation)</string>
 	<key>iPad7,6</key>
 	<string>iPad (6th generation)</string>
+	<key>iPad7,11</key>
+	<string>iPad (7th generation, WiFi)</string>
+	<key>iPad7,12</key>
+	<string>iPad (7th generation, Cellular)</string>
 	<key>iPad8,1</key>
 	<string>iPad Pro (11 WiFi)</string>
 	<key>iPad8,2</key>
@@ -220,10 +254,20 @@
 	<string>iPad Air (3rd generation WiFi)</string>
 	<key>iPad11,4</key>
 	<string>iPad Air (3rd generation Cellular)</string>
+	<key>iPad11,6</key>
+	<string>iPad (8th generation, WiFi)</string>
+	<key>iPad11,7</key>
+	<string>iPad (8th generation, Cellular)</string>
 	<key>iPad12,1</key>
 	<string>iPad (9th generation WiFi)</string>
 	<key>iPad12,2</key>
 	<string>iPad (9th generation Cellular)</string>
+	<key>iPad13,1</key>
+	<string>iPad Air (4th generation, WiFi)</string>
+	<key>iPad13,2</key>
+	<string>iPad Air (4th generation, Cellular)</string>
+	<key>iPad13,4</key>
+	<string>iPad Pro (11 3rd generation WiFi)</string>
 	<key>iPad13,5</key>
 	<string>iPad Pro (11 3rd generation Cellular US)</string>
 	<key>iPad13,6</key>
@@ -258,5 +302,85 @@
 	<string>iPad Pro (12.9 6th generation WiFi)</string>
 	<key>iPad14,6</key>
 	<string>iPad Pro (12.9 6th generation Cellular)</string>
+	<key>iPad14,8</key>
+	<string>iPad Air (11-inch, M2, WiFi)</string>
+	<key>iPad14,9</key>
+	<string>iPad Air (11-inch, M2, Cellular)</string>
+	<key>iPad14,10</key>
+	<string>iPad Air (13-inch, M2, WiFi)</string>
+	<key>iPad14,11</key>
+	<string>iPad Air (13-inch, M2, Cellular)</string>
+	<key>iPad16,1</key>
+	<string>iPad mini (7th generation, WiFi)</string>
+	<key>iPad16,2</key>
+	<string>iPad mini (7th generation, Cellular)</string>
+	<key>iPad16,3</key>
+	<string>iPad Pro (11-inch, M4, WiFi)</string>
+	<key>iPad16,4</key>
+	<string>iPad Pro (11-inch, M4, Cellular)</string>
+	<key>iPad16,5</key>
+	<string>iPad Pro (13-inch, M4, WiFi)</string>
+	<key>iPad16,6</key>
+	<string>iPad Pro (13-inch, M4, Cellular)</string>
+	<key>MacBookAir10,1</key>
+	<string>MacBook Air (M1, 2020)</string>
+	<key>Mac14,2</key>
+	<string>MacBook Air (M2, 2022)</string>
+	<key>Mac14,15</key>
+	<string>MacBook Air (15-inch, M2, 2023)</string>
+	<key>Mac15,12</key>
+	<string>MacBook Air (13-inch, M3, 2024)</string>
+	<key>Mac15,13</key>
+	<string>MacBook Air (15-inch, M3, 2024)</string>
+	<key>Mac16,12</key>
+	<string>MacBook Air (13-inch, M4, 2025)</string>
+	<key>Mac16,13</key>
+	<string>MacBook Air (15-inch, M4, 2025)</string>
+	<key>MacBookPro17,1</key>
+	<string>MacBook Pro (13-inch, M1, 2020)</string>
+	<key>MacBookPro18,1</key>
+	<string>MacBook Pro (16-inch, M1 Pro, 2021)</string>
+	<key>MacBookPro18,2</key>
+	<string>MacBook Pro (16-inch, M1 Max, 2021)</string>
+	<key>MacBookPro18,3</key>
+	<string>MacBook Pro (14-inch, M1 Pro, 2021)</string>
+	<key>MacBookPro18,4</key>
+	<string>MacBook Pro (14-inch, M1 Max, 2021)</string>
+	<key>Mac14,7</key>
+	<string>MacBook Pro (13-inch, M2, 2022)</string>
+	<key>Mac14,5</key>
+	<string>MacBook Pro (14-inch, M2 Pro, 2023)</string>
+	<key>Mac14,6</key>
+	<string>MacBook Pro (14-inch, M2 Max, 2023)</string>
+	<key>Mac14,9</key>
+	<string>MacBook Pro (16-inch, M2 Pro, 2023)</string>
+	<key>Mac14,10</key>
+	<string>MacBook Pro (16-inch, M2 Max, 2023)</string>
+	<key>Mac15,3</key>
+	<string>MacBook Pro (14-inch, M3, 2023)</string>
+	<key>Mac15,6</key>
+	<string>MacBook Pro (14-inch, M3 Pro, 2023)</string>
+	<key>Mac15,7</key>
+	<string>MacBook Pro (16-inch, M3 Pro, 2023)</string>
+	<key>Mac15,8</key>
+	<string>MacBook Pro (14-inch, M3 Max, 2023)</string>
+	<key>Mac15,9</key>
+	<string>MacBook Pro (16-inch, M3 Max, 2023)</string>
+	<key>Mac15,10</key>
+	<string>MacBook Pro (14-inch, M3 Pro, 2023)</string>
+	<key>Mac15,11</key>
+	<string>MacBook Pro (16-inch, M3 Max, 2023)</string>
+	<key>Mac16,1</key>
+	<string>MacBook Pro (14-inch, M4 Pro, 2024)</string>
+	<key>Mac16,2</key>
+	<string>MacBook Pro (16-inch, M4 Pro, 2024)</string>
+	<key>Mac16,5</key>
+	<string>MacBook Pro (14-inch, M4, 2024)</string>
+	<key>Mac16,6</key>
+	<string>MacBook Pro (14-inch, M4 Max, 2024)</string>
+	<key>Mac16,7</key>
+	<string>MacBook Pro (16-inch, M4 Max, 2024)</string>
+	<key>RealityDevice14,1</key>
+	<string>Apple Vision Pro</string>
 </dict>
 </plist>

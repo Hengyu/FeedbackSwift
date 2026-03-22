@@ -3,16 +3,10 @@
 // Copyright (c) 2017 CAPH TECH. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-struct SystemVersionItem: FeedbackUnit {
-    let display: Bool
-
-    var version: String {
+struct SystemVersionItem {
+    static var version: String {
         ProcessInfo.processInfo.operatingSystemVersionString
-    }
-
-    init(display: Bool = true) {
-        self.display = display
     }
 }

@@ -1,9 +1,11 @@
 # FeedbackSwift
 
-![](https://img.shields.io/badge/iOS-14.0%2B-green)
-![](https://img.shields.io/badge/macCatalyst-14.0%2B-green)
+![](https://img.shields.io/badge/iOS-17.0%2B-green)
+![](https://img.shields.io/badge/macCatalyst-17.0%2B-green)
+![](https://img.shields.io/badge/macOS-14.0%2B-green)
+![](https://img.shields.io/badge/tvOS-17.0%2B-green)
 ![](https://img.shields.io/badge/visionOS-1.0%2B-green)
-![](https://img.shields.io/badge/Swift-5-orange?logo=Swift&logoColor=white)
+![](https://img.shields.io/badge/Swift-6-orange?logo=Swift&logoColor=white)
 ![](https://img.shields.io/github/last-commit/hengyu/FeedbackSwift)
 
 **FeedbackSwift** provides an interface to collect user's feedback.
@@ -18,7 +20,7 @@
 
 ## Requirements
 
-- iOS 14.0+, macCatalyst 14.0+, visionOS 1.0+
+- iOS 17.0+, macCatalyst 17.0+, macOS 14.0+, tvOS 17.0+, visionOS 1.0+
 
 ## Installation
 

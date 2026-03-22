@@ -3,12 +3,15 @@
 // Copyright (c) 2017 CAPH TECH. All rights reserved.
 //
 
-import Dispatch
 import Foundation
 
 extension Bundle {
     static var feedbackBundle: Bundle {
-        Bundle(for: FeedbackViewController.self)
+        #if SWIFT_PACKAGE
+        Bundle.module
+        #else
+        Bundle.main
+        #endif
     }
 
     static var platformNamesPlistPath: String? {
@@ -21,9 +24,6 @@ extension Bundle {
         for bundle in bundles {
             guard let path = bundle.path(forResource: "PlatformNames", ofType: "plist")
             else { continue }
-            return path
-        }
-        if let path = Bundle.main.path(forResource: "PlatformNames", ofType: "plist") {
             return path
         }
         return nil

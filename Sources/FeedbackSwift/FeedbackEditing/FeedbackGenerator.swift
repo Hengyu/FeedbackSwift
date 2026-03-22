@@ -8,19 +8,16 @@ import Foundation
 struct FeedbackGenerator {
     static func generate(
         configuration: FeedbackConfiguration,
-        repository: FeedbackEditingItemsRepositoryProtocol
+        email: String?,
+        topic: (any TopicProtocol)?,
+        body: String,
+        media: Media?,
+        deviceName: String,
+        systemVersion: String,
+        appName: String,
+        appVersion: String,
+        appBuild: String
     ) -> Feedback {
-        let deviceName = repository.item(of: DeviceNameItem.self)?.name ?? ""
-        let systemVersion = repository.item(of: SystemVersionItem.self)?.version ?? ""
-
-        let appName = repository.item(of: AppNameItem.self)?.name ?? ""
-        let appVersion = repository.item(of: AppVersionItem.self)?.version ?? ""
-        let appBuild = repository.item(of: AppBuildItem.self)?.build ?? ""
-        let email = repository.item(of: UserEmailItem.self)?.email
-        let topic = repository.item(of: TopicItem.self)?.selection
-        let attachment = repository.item(of: AttachmentItem.self)?.media
-        let body = repository.item(of: BodyItem.self)?.bodyText ?? ""
-
         let subject = configuration.subject ?? String(format: "%@: %@", appName, topic?.localizedTitle ?? "")
 
         let format = configuration.usesHTML ? generateHTML : generateString
@@ -42,8 +39,8 @@ struct FeedbackGenerator {
             subject: subject,
             body: formattedBody,
             isHTML: configuration.usesHTML,
-            jpeg: attachment?.jpegData,
-            mp4: attachment?.videoData
+            jpeg: media?.jpegData,
+            mp4: media?.videoData
         )
     }
 
@@ -114,8 +111,6 @@ struct FeedbackGenerator {
         platform = "macOS"
         #elseif os(tvOS)
         platform = "tvOS"
-        #elseif os(watchOS)
-        platform = "watchOS"
         #elseif os(visionOS)
         platform = "visionOS"
         #else
