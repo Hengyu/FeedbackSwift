@@ -5,7 +5,6 @@ import XCTest
 final class FeedbackViewModelTests: XCTestCase {
     func testInitialState() {
         let vm = FeedbackViewModel(topics: Topic.allCases, preference: .default)
-        XCTAssertEqual(vm.userEmail, "")
         XCTAssertEqual(vm.bodyText, "")
         XCTAssertNil(vm.attachmentMedia)
         XCTAssertFalse(vm.hasAttachedMedia)
@@ -23,12 +22,6 @@ final class FeedbackViewModelTests: XCTestCase {
         let vm = FeedbackViewModel(topics: MockTopic.allCases, preference: .default)
         XCTAssertEqual(vm.topics.count, 2)
         XCTAssertEqual(vm.selectedTopic?.title, "Alpha")
-    }
-
-    func testUserEmailUpdate() {
-        let vm = FeedbackViewModel(topics: Topic.allCases, preference: .default)
-        vm.userEmail = "test@example.com"
-        XCTAssertEqual(vm.userEmail, "test@example.com")
     }
 
     func testBodyTextUpdate() {
@@ -90,24 +83,13 @@ final class FeedbackViewModelTests: XCTestCase {
     func testGenerateFeedbackIntegration() {
         let config = makeConfiguration(toRecipients: ["to@test.com"])
         let vm = FeedbackViewModel(topics: config.topics, preference: config.preference)
-        vm.userEmail = "user@test.com"
         vm.bodyText = "Great app!"
         vm.selectedTopic = Topic.request
 
         let feedback = vm.generateFeedback(configuration: config)
-        XCTAssertEqual(feedback.email, "user@test.com")
         XCTAssertEqual(feedback.to, ["to@test.com"])
         XCTAssertTrue(feedback.body.contains("Great app!"))
         XCTAssertFalse(feedback.isHTML)
-    }
-
-    func testGenerateFeedbackEmptyEmailIsNil() {
-        let config = makeConfiguration()
-        let vm = FeedbackViewModel(topics: config.topics, preference: config.preference)
-        vm.userEmail = ""
-
-        let feedback = vm.generateFeedback(configuration: config)
-        XCTAssertNil(feedback.email)
     }
 
     func testGenerateFeedbackWithAttachment() {
@@ -123,7 +105,6 @@ final class FeedbackViewModelTests: XCTestCase {
 
     func testPreferenceStoredCorrectly() {
         let pref = FeedbackUnitPreference(
-            enablesUserEmail: true,
             enablesAttachment: false,
             enablesCameraPicker: true,
             showsAppInfo: true

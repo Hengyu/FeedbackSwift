@@ -13,7 +13,6 @@ import SwiftUI
 
 @MainActor @Observable
 final class FeedbackViewModel {
-    var userEmail: String = ""
     var selectedTopic: (any TopicProtocol)?
     var bodyText: String = ""
     var attachmentMedia: Media?
@@ -60,7 +59,6 @@ final class FeedbackViewModel {
     func generateFeedback(configuration: FeedbackConfiguration) -> Feedback {
         FeedbackGenerator.generate(
             configuration: configuration,
-            email: userEmail.isEmpty ? nil : userEmail,
             topic: selectedTopic,
             body: bodyText,
             media: attachmentMedia,

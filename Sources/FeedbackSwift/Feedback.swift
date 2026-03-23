@@ -8,7 +8,6 @@ import Foundation
 // swiftlint:disable identifier_name
 
 public struct Feedback {
-    public let email: String?
     public let to: [String]
     public let cc: [String]
     public let bcc: [String]

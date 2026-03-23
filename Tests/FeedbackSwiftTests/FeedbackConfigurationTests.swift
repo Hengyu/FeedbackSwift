@@ -24,7 +24,6 @@ final class FeedbackConfigurationTests: XCTestCase {
             bccRecipients: ["bcc@b.com"],
             usesHTML: true,
             preference: FeedbackUnitPreference(
-                enablesUserEmail: true,
                 enablesAttachment: false,
                 enablesCameraPicker: true,
                 showsAppInfo: true
@@ -37,7 +36,6 @@ final class FeedbackConfigurationTests: XCTestCase {
         XCTAssertEqual(config.ccRecipients, ["cc@b.com"])
         XCTAssertEqual(config.bccRecipients, ["bcc@b.com"])
         XCTAssertTrue(config.usesHTML)
-        XCTAssertTrue(config.preference.enablesUserEmail)
         XCTAssertFalse(config.preference.enablesAttachment)
         XCTAssertTrue(config.preference.enablesCameraPicker)
         XCTAssertTrue(config.preference.showsAppInfo)

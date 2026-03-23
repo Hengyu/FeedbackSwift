@@ -29,12 +29,6 @@ public struct FeedbackView: View {
 
     public var body: some View {
         Form {
-            if configuration.preference.enablesUserEmail {
-                Section(localized("feedback.UserDetail")) {
-                    UserEmailRow(viewModel: viewModel)
-                }
-            }
-
             Section {
                 TopicRow(viewModel: viewModel)
                 BodyRow(viewModel: viewModel)
@@ -61,7 +55,11 @@ public struct FeedbackView: View {
                 }
             }
         }
+        .formStyle(.grouped)
         .navigationTitle(localized("feedback.Feedback"))
+        #if !os(macOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
                 Button(localized("feedback.Cancel")) {
@@ -183,5 +181,19 @@ extension FeedbackView {
         var view = self
         view.feedbackSendingFailedAction = action
         return view
+    }
+}
+
+#Preview {
+    NavigationStack {
+        FeedbackView(
+            configuration: FeedbackConfiguration(
+                toRecipients: ["example@example.com"],
+                preference: FeedbackUnitPreference(
+                    enablesAttachment: true,
+                    showsAppInfo: true
+                )
+            )
+        )
     }
 }

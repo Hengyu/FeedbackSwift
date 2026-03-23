@@ -6,18 +6,15 @@
 import Foundation
 
 public struct FeedbackUnitPreference: Equatable, Hashable, Sendable {
-    public let enablesUserEmail: Bool
     public let enablesAttachment: Bool
     public let enablesCameraPicker: Bool
     public let showsAppInfo: Bool
 
     public init(
-        enablesUserEmail: Bool = false,
         enablesAttachment: Bool = true,
         enablesCameraPicker: Bool = false,
         showsAppInfo: Bool = false
     ) {
-        self.enablesUserEmail = enablesUserEmail
         self.enablesAttachment = enablesAttachment
         self.enablesCameraPicker = enablesCameraPicker
         self.showsAppInfo = showsAppInfo

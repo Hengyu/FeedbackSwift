@@ -8,7 +8,6 @@ import Foundation
 struct FeedbackGenerator {
     static func generate(
         configuration: FeedbackConfiguration,
-        email: String?,
         topic: (any TopicProtocol)?,
         body: String,
         media: Media?,
@@ -32,7 +31,6 @@ struct FeedbackGenerator {
         )
 
         return Feedback(
-            email: email,
             to: configuration.toRecipients,
             cc: configuration.ccRecipients,
             bcc: configuration.bccRecipients,
